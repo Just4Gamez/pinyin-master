@@ -44,7 +44,7 @@
                 </div>
                 <div>
                     <h1 class="font-bold text-lg leading-tight bg-gradient-to-r from-red-400 to-amber-400 bg-clip-text text-transparent">Mandarin Master</h1>
-                    <p class="text-xs text-slate-400">Pinyin, Hanzi & Conversation Lab</p>
+                    <p class="text-xs text-slate-400">Pinyin, Kenal Huruf & Conversation Lab</p>
                 </div>
             </div>
 
@@ -68,12 +68,22 @@
                 <div class="relative z-10 max-w-2xl mx-auto space-y-4">
                     <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30 uppercase tracking-wider">Kurikulum Pinyin, Hanzi & Makanan Cina</span>
                     <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Kuasai Bahasa Mandarin Sepenuhnya</h2>
-                    <p class="text-slate-300 text-sm md:text-base">Pilih tahap Pinyin (1 hingga 10), Kategori Tematik & Menu Makanan, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
+                    <p class="text-slate-300 text-sm md:text-base">Pilih Modul Kenal Huruf Pinyin, Level 1 hingga 10, Kategori Tematik & Menu Makanan, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
                 </div>
             </div>
 
-            <!-- Menu Pilihan Utama (Grid 6 Menu) -->
+            <!-- Menu Pilihan Utama (Grid Menu) -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 0. Modul Kenal Huruf Pinyin (BARU TAMBAHAN) -->
+                <div onclick="showSection('alphabet')" class="bg-slate-900/80 border border-slate-800 hover:border-teal-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl relative overflow-hidden">
+                    <div class="absolute top-3 right-3 px-2 py-0.5 bg-teal-500/20 text-teal-400 text-[10px] font-bold rounded border border-teal-500/30">ASAS PENTING</div>
+                    <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-font"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Kenal Huruf & Pinyin (声母/韵母)</h3>
+                    <p class="text-slate-400 text-sm">Kenal pasti konsonan (Shengmu), vokal (Yunmu) dan 4 nada asas.</p>
+                </div>
+
                 <!-- 1. Study & Practice (Level 1-10) -->
                 <div onclick="showSection('levels')" class="bg-slate-900/80 border border-slate-800 hover:border-red-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl">
                     <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
@@ -129,6 +139,30 @@
                     <p class="text-slate-400 text-sm">Fokus mendengar sebutan audio penutur asli untuk kesemua frasa.</p>
                 </div>
             </div>
+        </section>
+
+        <!-- ================= KENAL HURUF & PINYIN SECTION (BARU) ================= -->
+        <section id="section-alphabet" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Modul Kenal Huruf & Pinyin Asas</h2>
+                    <p class="text-slate-400 text-sm">Ketahui asas Konsonan (Shengmu), Vokal (Yunmu) dan 4 Nada</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex space-x-2 border-b border-slate-800 pb-3">
+                <button onclick="switchAlphabetTab('tones')" id="tab-btn-tones" class="px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow">4 Nada Suara</button>
+                <button onclick="switchAlphabetTab('initials')" id="tab-btn-initials" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700">Konsonan (声母)</button>
+                <button onclick="switchAlphabetTab('finals')" id="tab-btn-finals" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700">Vokal (韵母)</button>
+            </div>
+
+            <!-- Tab Content Area -->
+            <div id="alphabet-content-area" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </section>
 
         <!-- ================= LEVEL SELECT SECTION ================= -->
@@ -372,6 +406,34 @@
             "面条": "🍜", "炒饭": "🍛", "饺子": "🥟", "包子": "🥠", "茶": "🍵", "啤酒": "🍺"
         };
 
+        // Data Rujukan Huruf Asas Pinyin (Modul Baru Tambahan Tanpa Mengubah Asal)
+        const alphabetData = {
+            tones: [
+                { char: "ā", pinyin: "mā", meaning: "Nada 1 (Datar/Tinggi)", desc: "Suara tinggi dan mendatar. Contoh: 妈 (mā - Ibu)" },
+                { char: "á", pinyin: "má", meaning: "Nada 2 (Menaik)", desc: "Suara naik ke atas seperti bertanya. Contoh: 麻 (má - Rami)" },
+                { char: "ǎ", pinyin: "mǎ", meaning: "Nada 3 (Turun kemudian naik)", desc: "Suara turun ke bawah lalu melengkung naik. Contoh: 马 (mǎ - Kuda)" },
+                { char: "à", pinyin: "mà", meaning: "Nada 4 (Menurun tegas)", desc: "Suara menyentak turun dengan tegas. Contoh: 骂 (mà - Marah)" }
+            ],
+            initials: [
+                { char: "b", pinyin: "b", meaning: "Sebutan 'B' ringan", desc: "Contoh perkataan: 爸爸 (bàba - Ayah)" },
+                { char: "p", pinyin: "p", meaning: "Sebutan 'P' hembusan angin", desc: "Contoh perkataan: 苹果 (píngguǒ - Epal)" },
+                { char: "m", pinyin: "m", meaning: "Sebutan 'M'", desc: "Contoh perkataan: 妈妈 (māma - Ibu)" },
+                { char: "f", pinyin: "f", meaning: "Sebutan 'F'", desc: "Contoh perkataan: 飞机 (fēijī - Kapal terbang)" },
+                { char: "d", pinyin: "d", meaning: "Sebutan 'D' ringan", desc: "Contoh perkataan: 大 (dà - Besar)" },
+                { char: "t", pinyin: "t", meaning: "Sebutan 'T' hembusan", desc: "Contoh perkataan: 太太 (tàitai - Puan)" },
+                { char: "n", pinyin: "n", meaning: "Sebutan 'N'", desc: "Contoh perkataan: 你 (nǐ - Awak)" },
+                { char: "l", pinyin: "l", meaning: "Sebutan 'L'", desc: "Contoh perkataan: 老师 (lǎoshī - Cikgu)" }
+            ],
+            finals: [
+                { char: "a", pinyin: "a", meaning: "Bunyi 'A'", desc: "Contoh perkataan: 妈 (mā - Ibu)" },
+                { char: "o", pinyin: "o", meaning: "Bunyi 'O'", desc: "Contoh perkataan: 我 (wǒ - Saya)" },
+                { char: "e", pinyin: "e", meaning: "Bunyi 'E' (seperti dalam 'emas')", desc: "Contoh perkataan: 饿 (è - Lapar)" },
+                { char: "i", pinyin: "i", meaning: "Bunyi 'I'", desc: "Contoh perkataan: 你 (nǐ - Awak)" },
+                { char: "u", pinyin: "u", meaning: "Bunyi 'U'", desc: "Contoh perkataan: 五 (wǔ - Lima)" },
+                { char: "ü", pinyin: "ü", meaning: "Bunyi 'U' senyum", desc: "Contoh perkataan: 女 (nǚ - Perempuan)" }
+            ]
+        };
+
         // Lengkap 10 Level Pembelajaran Berperingkat
         const levelsData = [
             {
@@ -558,17 +620,53 @@
             renderSpecialCategoryCards();
             renderConversationCards();
             renderGrammarLabCards();
+            switchAlphabetTab('tones'); // Initialize tab huruf asas
             buildAllWordsList();
             showSection('home');
         });
 
         function showSection(sectionId) {
-            ['home', 'levels', 'special', 'conversation', 'grammar-lab', 'study', 'quiz', 'words', 'listen', 'result'].forEach(id => {
+            ['home', 'alphabet', 'levels', 'special', 'conversation', 'grammar-lab', 'study', 'quiz', 'words', 'listen', 'result'].forEach(id => {
                 const el = document.getElementById(`section-${id}`);
                 if (el) el.classList.add('hidden');
             });
             const target = document.getElementById(`section-${sectionId}`);
             if (target) target.classList.remove('hidden');
+        }
+
+        // Fungsi Tukar Tab Kenal Huruf & Pinyin
+        function switchAlphabetTab(tabName) {
+            ['tones', 'initials', 'finals'].forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (btn) {
+                    if (t === tabName) {
+                        btn.className = "px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow";
+                    } else {
+                        btn.className = "px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700";
+                    }
+                }
+            });
+
+            const container = document.getElementById('alphabet-content-area');
+            if(!container) return;
+            container.innerHTML = '';
+            
+            alphabetData[tabName].forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 p-5 rounded-2xl flex items-center justify-between shadow-lg";
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="text-3xl font-black text-teal-400 hanzi-font">${item.char}</div>
+                        <div class="text-xs font-bold text-red-400">Pinyin: ${item.pinyin}</div>
+                        <div class="text-sm font-bold text-white">${item.meaning}</div>
+                        <div class="text-xs text-slate-400">${item.desc}</div>
+                    </div>
+                    <button onclick="speakText('${item.char}')" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-xl text-teal-400 flex items-center justify-center shadow">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
         }
 
         function renderLevelCards() {
