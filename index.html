@@ -68,20 +68,20 @@
                 <div class="relative z-10 max-w-2xl mx-auto space-y-4">
                     <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30 uppercase tracking-wider">Kurikulum Pinyin, Hanzi & Makanan Cina</span>
                     <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Kuasai Bahasa Mandarin Sepenuhnya</h2>
-                    <p class="text-slate-300 text-sm md:text-base">Pilih Modul Kenal Huruf Pinyin, Level 1 hingga 10, Kategori Tematik & Menu Makanan, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
+                    <p class="text-slate-300 text-sm md:text-base">Teroka Modul Kenal Huruf Pinyin Penuh, Level 1 hingga 10, Kategori Tematik & Menu Makanan, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
                 </div>
             </div>
 
             <!-- Menu Pilihan Utama (Grid Menu) -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- 0. Modul Kenal Huruf Pinyin (BARU TAMBAHAN) -->
+                <!-- 0. Modul Kenal Huruf Pinyin Penuh -->
                 <div onclick="showSection('alphabet')" class="bg-slate-900/80 border border-slate-800 hover:border-teal-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl relative overflow-hidden">
-                    <div class="absolute top-3 right-3 px-2 py-0.5 bg-teal-500/20 text-teal-400 text-[10px] font-bold rounded border border-teal-500/30">ASAS PENTING</div>
+                    <div class="absolute top-3 right-3 px-2 py-0.5 bg-teal-500/20 text-teal-400 text-[10px] font-bold rounded border border-teal-500/30">PILIHAN UTAMA</div>
                     <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
                         <i class="fa-solid fa-font"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-white">Kenal Huruf & Pinyin (声母/韵母)</h3>
-                    <p class="text-slate-400 text-sm">Kenal pasti konsonan (Shengmu), vokal (Yunmu) dan 4 nada asas.</p>
+                    <h3 class="font-bold text-lg text-white">Kenal Huruf & Pinyin Penuh</h3>
+                    <p class="text-slate-400 text-sm">Senarai lengkap Konsonan (23 Shengmu), Vokal (24 Yunmu) dan 4 Nada.</p>
                 </div>
 
                 <!-- 1. Study & Practice (Level 1-10) -->
@@ -141,12 +141,12 @@
             </div>
         </section>
 
-        <!-- ================= KENAL HURUF & PINYIN SECTION (BARU) ================= -->
+        <!-- ================= KENAL HURUF & PINYIN PENUH SECTION ================= -->
         <section id="section-alphabet" class="hidden space-y-6 transition-all duration-300">
             <div class="flex items-center justify-between">
                 <div>
-                    <h2 class="text-2xl font-bold text-white">Modul Kenal Huruf & Pinyin Asas</h2>
-                    <p class="text-slate-400 text-sm">Ketahui asas Konsonan (Shengmu), Vokal (Yunmu) dan 4 Nada</p>
+                    <h2 class="text-2xl font-bold text-white">Modul Kenal Huruf & Pinyin Penuh</h2>
+                    <p class="text-slate-400 text-sm">Senarai lengkap Kesemua Konsonan (Shengmu) & Vokal (Yunmu)</p>
                 </div>
                 <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -155,10 +155,10 @@
             </div>
 
             <!-- Tab Buttons -->
-            <div class="flex space-x-2 border-b border-slate-800 pb-3">
-                <button onclick="switchAlphabetTab('tones')" id="tab-btn-tones" class="px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow">4 Nada Suara</button>
-                <button onclick="switchAlphabetTab('initials')" id="tab-btn-initials" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700">Konsonan (声母)</button>
-                <button onclick="switchAlphabetTab('finals')" id="tab-btn-finals" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700">Vokal (韵母)</button>
+            <div class="flex space-x-2 border-b border-slate-800 pb-3 overflow-x-auto">
+                <button onclick="switchAlphabetTab('tones')" id="tab-btn-tones" class="px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow whitespace-nowrap">4 Nada Suara</button>
+                <button onclick="switchAlphabetTab('initials')" id="tab-btn-initials" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Konsonan / Shengmu (23 Huruf)</button>
+                <button onclick="switchAlphabetTab('finals')" id="tab-btn-finals" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Vokal / Yunmu (24+ Huruf)</button>
             </div>
 
             <!-- Tab Content Area -->
@@ -406,7 +406,7 @@
             "面条": "🍜", "炒饭": "🍛", "饺子": "🥟", "包子": "🥠", "茶": "🍵", "啤酒": "🍺"
         };
 
-        // Data Rujukan Huruf Asas Pinyin (Modul Baru Tambahan Tanpa Mengubah Asal)
+        // Data Lengkap Pinyin Penuh (Konsonan & Vokal Sebenar Bahasa Mandarin)
         const alphabetData = {
             tones: [
                 { char: "ā", pinyin: "mā", meaning: "Nada 1 (Datar/Tinggi)", desc: "Suara tinggi dan mendatar. Contoh: 妈 (mā - Ibu)" },
@@ -415,22 +415,46 @@
                 { char: "à", pinyin: "mà", meaning: "Nada 4 (Menurun tegas)", desc: "Suara menyentak turun dengan tegas. Contoh: 骂 (mà - Marah)" }
             ],
             initials: [
-                { char: "b", pinyin: "b", meaning: "Sebutan 'B' ringan", desc: "Contoh perkataan: 爸爸 (bàba - Ayah)" },
-                { char: "p", pinyin: "p", meaning: "Sebutan 'P' hembusan angin", desc: "Contoh perkataan: 苹果 (píngguǒ - Epal)" },
-                { char: "m", pinyin: "m", meaning: "Sebutan 'M'", desc: "Contoh perkataan: 妈妈 (māma - Ibu)" },
-                { char: "f", pinyin: "f", meaning: "Sebutan 'F'", desc: "Contoh perkataan: 飞机 (fēijī - Kapal terbang)" },
-                { char: "d", pinyin: "d", meaning: "Sebutan 'D' ringan", desc: "Contoh perkataan: 大 (dà - Besar)" },
-                { char: "t", pinyin: "t", meaning: "Sebutan 'T' hembusan", desc: "Contoh perkataan: 太太 (tàitai - Puan)" },
-                { char: "n", pinyin: "n", meaning: "Sebutan 'N'", desc: "Contoh perkataan: 你 (nǐ - Awak)" },
-                { char: "l", pinyin: "l", meaning: "Sebutan 'L'", desc: "Contoh perkataan: 老师 (lǎoshī - Cikgu)" }
+                { char: "b", pinyin: "b", meaning: "Konsonan 'B' ringan", desc: "Contoh: 爸爸 (bàba - Ayah)" },
+                { char: "p", pinyin: "p", meaning: "Konsonan 'P' berhembus", desc: "Contoh: 苹果 (píngguǒ - Epal)" },
+                { char: "m", pinyin: "m", meaning: "Konsonan 'M'", desc: "Contoh: 妈妈 (māma - Ibu)" },
+                { char: "f", pinyin: "f", meaning: "Konsonan 'F'", desc: "Contoh: 飞机 (fēijī - Kapal terbang)" },
+                { char: "d", pinyin: "d", meaning: "Konsonan 'D' ringan", desc: "Contoh: 大 (dà - Besar)" },
+                { char: "t", pinyin: "t", meaning: "Konsonan 'T' berhembus", desc: "Contoh: 太太 (tàitai - Puan)" },
+                { char: "n", pinyin: "n", meaning: "Konsonan 'N'", desc: "Contoh: 你 (nǐ - Awak)" },
+                { char: "l", pinyin: "l", meaning: "Konsonan 'L'", desc: "Contoh: 老师 (lǎoshī - Cikgu)" },
+                { char: "g", pinyin: "g", meaning: "Konsonan 'G' kerongkong", desc: "Contoh: 哥哥 (gēge - Abang)" },
+                { char: "k", pinyin: "k", meaning: "Konsonan 'K' berhembus", desc: "Contoh: 咖啡 (kāfēi - Kopi)" },
+                { char: "h", pinyin: "h", meaning: "Konsonan 'H' (seperti 'h' Melayu)", desc: "Contoh: 喝 (hē - Minum)" },
+                { char: "j", pinyin: "j", meaning: "Konsonan 'J' tajam (lidah rata)", desc: "Contoh: 家 (jiā - Rumah)" },
+                { char: "q", pinyin: "q", meaning: "Konsonan 'Q' (bunyi 'ch' angin)", desc: "Contoh: 铅笔 (qiānbǐ - Pensel)" },
+                { char: "x", pinyin: "x", meaning: "Konsonan 'X' (bunyi 'sh' senyum)", desc: "Contoh: 谢谢 (xièxie - Terima kasih)" },
+                { char: "zh", pinyin: "zh", meaning: "Konsonan 'Zh' (lidah melingkar)", desc: "Contoh: 知道 (zhīdào - Tahu)" },
+                { char: "ch", pinyin: "ch", meaning: "Konsonan 'Ch' (melingkar hembus)", desc: "Contoh: 吃 (chī - Makan)" },
+                { char: "sh", pinyin: "sh", meaning: "Konsonan 'Sh' (melingkar)", desc: "Contoh: 书 (shū - Buku)" },
+                { char: "r", pinyin: "r", meaning: "Konsonan 'R' (campuran r dan j)", desc: "Contoh: 人 (rén - Orang)" },
+                { char: "z", pinyin: "z", meaning: "Konsonan 'Z' (bunyi 'dz')", desc: "Contoh: 字 (zì - Perkataan)" },
+                { char: "c", pinyin: "c", meaning: "Konsonan 'C' (bunyi 'ts' tajam)", desc: "Contoh: 菜 (cài - Makanan/Sayur)" },
+                { char: "s", pinyin: "s", meaning: "Konsonan 'S' biasa", desc: "Contoh: 三 (sān - Tiga)" },
+                { char: "y", pinyin: "y", meaning: "Separuh vokal 'Y'", desc: "Contoh: 医生 (yīshēng - Doktor)" },
+                { char: "w", pinyin: "w", meaning: "Separuh vokal 'W'", desc: "Contoh: 五 (wǔ - Lima)" }
             ],
             finals: [
-                { char: "a", pinyin: "a", meaning: "Bunyi 'A'", desc: "Contoh perkataan: 妈 (mā - Ibu)" },
-                { char: "o", pinyin: "o", meaning: "Bunyi 'O'", desc: "Contoh perkataan: 我 (wǒ - Saya)" },
-                { char: "e", pinyin: "e", meaning: "Bunyi 'E' (seperti dalam 'emas')", desc: "Contoh perkataan: 饿 (è - Lapar)" },
-                { char: "i", pinyin: "i", meaning: "Bunyi 'I'", desc: "Contoh perkataan: 你 (nǐ - Awak)" },
-                { char: "u", pinyin: "u", meaning: "Bunyi 'U'", desc: "Contoh perkataan: 五 (wǔ - Lima)" },
-                { char: "ü", pinyin: "ü", meaning: "Bunyi 'U' senyum", desc: "Contoh perkataan: 女 (nǚ - Perempuan)" }
+                { char: "a", pinyin: "a", meaning: "Vokal 'A'", desc: "Contoh: 妈 (mā)" },
+                { char: "o", pinyin: "o", meaning: "Vokal 'O'", desc: "Contoh: 啵 (bo)" },
+                { char: "e", pinyin: "e", meaning: "Vokal 'E'", desc: "Contoh: 饿 (è)" },
+                { char: "i", pinyin: "i", meaning: "Vokal 'I'", desc: "Contoh: 你 (nǐ)" },
+                { char: "u", pinyin: "u", meaning: "Vokal 'U'", desc: "Contoh: 入 (rù)" },
+                { char: "ü", pinyin: "ü", meaning: "Vokal 'Ü' (u senyum)", desc: "Contoh: 女 (nǚ)" },
+                { char: "ai", pinyin: "ai", meaning: "Gabungan 'Ai'", desc: "Contoh: 爱 (ài - Cinta)" },
+                { char: "ei", pinyin: "ei", meaning: "Gabungan 'Ei'", desc: "Contoh: 爷爷 (yéye - Datuk)" },
+                { char: "ao", pinyin: "ao", meaning: "Gabungan 'Ao'", desc: "Contoh: 熬 (áo)" },
+                { char: "ou", pinyin: "ou", meaning: "Gabungan 'Ou'", desc: "Contoh: 鸥 (ōu)" },
+                { char: "an", pinyin: "an", meaning: "Vokal sengau '-an'", desc: "Contoh: 安 (ān)" },
+                { char: "en", pinyin: "en", meaning: "Vokal sengau '-en'", desc: "Contoh: 恩 (ēn)" },
+                { char: "ang", pinyin: "ang", meaning: "Vokal sengau belakang '-ang'", desc: "Contoh: 昂 (áng)" },
+                { char: "eng", pinyin: "eng", meaning: "Vokal sengau belakang '-eng'", desc: "Contoh: 邓 (dèng)" },
+                { char: "ong", pinyin: "ong", meaning: "Vokal sengau belakang '-ong'", desc: "Contoh: 中 (zhōng)" }
             ]
         };
 
@@ -620,7 +644,7 @@
             renderSpecialCategoryCards();
             renderConversationCards();
             renderGrammarLabCards();
-            switchAlphabetTab('tones'); // Initialize tab huruf asas
+            switchAlphabetTab('tones');
             buildAllWordsList();
             showSection('home');
         });
@@ -634,15 +658,14 @@
             if (target) target.classList.remove('hidden');
         }
 
-        // Fungsi Tukar Tab Kenal Huruf & Pinyin
         function switchAlphabetTab(tabName) {
             ['tones', 'initials', 'finals'].forEach(t => {
                 const btn = document.getElementById(`tab-btn-${t}`);
                 if (btn) {
                     if (t === tabName) {
-                        btn.className = "px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow";
+                        btn.className = "px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow whitespace-nowrap";
                     } else {
-                        btn.className = "px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700";
+                        btn.className = "px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap";
                     }
                 }
             });
