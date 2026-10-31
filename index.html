@@ -1,575 +1,804 @@
-
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="ms" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mandarin Master - Learn Chinese</title>
-
-<style>
-:root {
-  --blue:#83a9df;
-  --dark:#344f78;
-  --pink:#f1b6cb;
-  --bg:#f4f7ff;
-  --white:#fff;
-  --text:#40516b;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
-header{
-  background:linear-gradient(135deg,#729bd5,#a9c2e9,#f1bfd1);
-  color:white;
-  text-align:center;
-  padding:35px 15px;
-}
-header h1{font-size:32px;margin:8px}
-header p{margin:6px}
-.container{max-width:1100px;margin:auto;padding:18px}
-.card{
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  margin-bottom:17px;
-  box-shadow:0 4px 15px #839cc51a;
-}
-nav{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin:20px 0;
-  justify-content:center;
-}
-nav button,.btn{
-  border:0;
-  padding:12px 16px;
-  border-radius:20px;
-  background:white;
-  color:var(--dark);
-  font-weight:bold;
-  cursor:pointer;
-}
-nav button.active,.btn{
-  background:var(--blue);
-  color:white;
-}
-nav button:hover,.btn:hover{opacity:.85}
-.section{display:none}
-.section.active{display:block}
-h2,h3{color:var(--dark)}
-.hero{text-align:center;padding:30px 15px}
-.big-chinese{font-size:55px;color:#648cc6;margin:15px}
-.pinyin{font-size:21px;color:#d27e9d;margin:8px}
-.meaning{font-size:16px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:12px;
-}
-.word{
-  background:#f5f8ff;
-  border:1px solid #e6edf8;
-  border-radius:14px;
-  padding:15px 8px;
-  text-align:center;
-}
-.word .han{font-size:32px;color:#648cc6}
-.word .py{color:#d27e9d;margin:7px}
-.word button{
-  border:0;background:#e8effb;
-  padding:8px 12px;border-radius:12px;
-  cursor:pointer;margin-top:8px;color:#344f78;
-}
-input,select,textarea{
-  width:100%;padding:12px;
-  border:1px solid #dce5f2;
-  border-radius:12px;margin:8px 0;
-  font-size:15px;
-}
-.option{
-  display:block;width:100%;text-align:left;
-  border:1px solid #dce5f2;
-  background:#f5f8ff;padding:13px;
-  border-radius:12px;margin:8px 0;cursor:pointer;
-}
-.option:hover{background:#e7effd}
-.progress{
-  background:#e9edf5;height:12px;
-  border-radius:20px;overflow:hidden;
-}
-.progress div{
-  background:linear-gradient(90deg,#7da7df,#edb3ca);
-  height:100%;width:0;
-}
-.level{
-  background:#f4f7ff;border-radius:12px;
-  padding:15px;cursor:pointer;border:1px solid #e2eafa;
-}
-.level:hover{background:#e8effd}
-#feedback{font-weight:bold;margin:12px 0}
-footer{text-align:center;padding:25px;color:#8291a6}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandarin Master - Ultimate Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        china: { red: '#DC2626', gold: '#F59E0B', dark: '#0F172A', card: '#1E293B' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap');
+        body { font-family: 'Poppins', 'Noto Sans SC', sans-serif; }
+        .hanzi-font { font-family: 'Noto Sans SC', sans-serif; }
+        .stroke-box {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.15) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+    </style>
 </head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
 
-<body>
+    <!-- Header / Navigation -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showSection('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 to-amber-500 flex items-center justify-center font-bold text-xl shadow-lg shadow-red-500/20 text-white">
+                    中
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight bg-gradient-to-r from-red-400 to-amber-400 bg-clip-text text-transparent">Mandarin Master</h1>
+                    <p class="text-xs text-slate-400">Pinyin, Hanzi & Conversation Lab</p>
+                </div>
+            </div>
 
-<header>
-  <div style="font-size:35px">🌸 🐼 🌸</div>
-  <h1>Mandarin Master</h1>
-  <h3 style="color:white">中文学习</h3>
-  <p>Learn Mandarin Step by Step</p>
-  <p>Belajar Bahasa Mandarin dari asas hingga mahir</p>
-</header>
+            <!-- Stats Bar -->
+            <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-1 bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-700/50 text-sm" title="Mata Skor">
+                    <i class="fa-solid fa-star text-amber-400"></i>
+                    <span id="stat-score" class="font-bold text-amber-300">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<div class="container">
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
 
-<div class="card">
-  <h3>🌷 Selamat Datang!</h3>
-  <p>Jom belajar Bahasa Mandarin bersama-sama. Mulakan dari asas dan tingkatkan kemahiran setiap hari.</p>
-  <b>Pelajaran selesai: <span id="done">0</span> / 21</b>
-  <div class="progress"><div id="bar"></div></div>
-  <p id="percent">0% selesai</p>
-</div>
+        <!-- ================= HOME SECTION ================= -->
+        <section id="section-home" class="space-y-8 transition-all duration-300">
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-red-950 to-slate-900 border border-slate-800 p-8 md:p-12 text-center shadow-2xl">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-black hanzi-font select-none">中文</div>
+                <div class="relative z-10 max-w-2xl mx-auto space-y-4">
+                    <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30 uppercase tracking-wider">Kurikulum Pinyin, Hanzi & Makanan Cina</span>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Kuasai Bahasa Mandarin Sepenuhnya</h2>
+                    <p class="text-slate-300 text-sm md:text-base">Pilih tahap Pinyin, Kategori Tematik & Menu Makanan Cina, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
+                </div>
+            </div>
 
-<nav>
-<button class="active" onclick="tab('home',this)">🏠 Home</button>
-<button onclick="tab('pinyin',this)">🔤 Pinyin</button>
-<button onclick="tab('levels',this)">📚 21 Levels</button>
-<button onclick="tab('vocab',this)">📝 Vocabulary</button>
-<button onclick="tab('conversation',this)">💬 Conversation</button>
-<button onclick="tab('grammar',this)">📖 Grammar</button>
-<button onclick="tab('writing',this)">✍️ Writing</button>
-<button onclick="tab('quiz',this)">🎯 Quiz</button>
-</nav>
+            <!-- Menu Pilihan Utama (Grid 6 Menu) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1. Study & Practice (Level 1-10) -->
+                <div onclick="showSection('levels')" class="bg-slate-900/80 border border-slate-800 hover:border-red-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Pinyin & Levels (1-10)</h3>
+                    <p class="text-slate-400 text-sm">Belajar nada suara, initial, final, dan kosa kata asas berperingkat.</p>
+                </div>
 
-<!-- HOME -->
-<section id="home" class="section active">
-<div class="card hero">
-  <h2>你好！</h2>
-  <div class="big-chinese">你好</div>
-  <div class="pinyin">Nǐ hǎo</div>
-  <div class="meaning">Hello / Hai</div>
-  <button class="btn" onclick="tab('levels',document.querySelectorAll('nav button')[2])">Start Learning →</button>
-</div>
+                <!-- 2. Special Categories -->
+                <div onclick="openSpecialMenu()" class="bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Kategori Tematik & Menu Makanan</h3>
+                    <p class="text-slate-400 text-sm">Nombor, Keluarga, serta Menu Makanan & Minuman Cina.</p>
+                </div>
 
-<div class="card">
-<h2>🌟 Apa yang akan dipelajari?</h2>
-<div class="grid">
-  <div class="word">🔤<h3>Pinyin</h3>Belajar sebutan</div>
-  <div class="word">📚<h3>Vocabulary</h3>Perkataan Mandarin</div>
-  <div class="word">💬<h3>Conversation</h3>Perbualan harian</div>
-  <div class="word">📖<h3>Grammar</h3>Bina ayat</div>
-  <div class="word">✍️<h3>Writing</h3>Menulis aksara</div>
-  <div class="word">🎯<h3>Quiz</h3>Uji pengetahuan</div>
-</div>
-</div>
-</section>
+                <!-- 3. Conversation Lab -->
+                <div onclick="openConversationMenu()" class="bg-slate-900/80 border border-slate-800 hover:border-pink-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl relative overflow-hidden">
+                    <div class="absolute top-3 right-3 px-2 py-0.5 bg-pink-500/20 text-pink-400 text-[10px] font-bold rounded border border-pink-500/30">POPULAR</div>
+                    <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Conversation Lab (Dialog)</h3>
+                    <p class="text-slate-400 text-sm">Dialog perbualan harian: Restoran, Membeli-belah, Teksi & Hotel.</p>
+                </div>
 
-<!-- PINYIN -->
-<section id="pinyin" class="section">
-<div class="card">
-<h2>🔤 Pinyin & Empat Nada</h2>
-<p>Pinyin ialah sistem menggunakan huruf Roman untuk membantu kita membaca dan menyebut perkataan Cina.</p>
+                <!-- 4. Grammar Lab -->
+                <div onclick="openGrammarLabMenu()" class="bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-book-atlas"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Mandarin Grammar Lab</h3>
+                    <p class="text-slate-400 text-sm">Formula tatabahasa Mandarin (Susunan ayat, Kata tanya, Penjodoh bilangan).</p>
+                </div>
 
-<div class="grid">
-<div class="word"><h2>ā</h2><b>Nada 1</b><p>Tinggi dan rata</p><button onclick="speak('mā')">🔊 Dengar mā</button></div>
-<div class="word"><h2>á</h2><b>Nada 2</b><p>Bunyi menaik</p><button onclick="speak('má')">🔊 Dengar má</button></div>
-<div class="word"><h2>ǎ</h2><b>Nada 3</b><p>Turun kemudian naik</p><button onclick="speak('mǎ')">🔊 Dengar mǎ</button></div>
-<div class="word"><h2>à</h2><b>Nada 4</b><p>Bunyi jatuh dengan tegas</p><button onclick="speak('mà')">🔊 Dengar mà</button></div>
-</div>
-<p><b>Nada neutral:</b> Sebutan ringan dan pendek, contohnya 吗 (ma).</p>
-</div>
+                <!-- 5. Words Dictionary -->
+                <div onclick="openWordsMode()" class="bg-slate-900/80 border border-slate-800 hover:border-purple-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-list-ul"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Words (Kamus Indeks)</h3>
+                    <p class="text-slate-400 text-sm">Teroka senarai penuh Hanzi, Pinyin dan maksud Bahasa Melayu.</p>
+                </div>
 
-<div class="card">
-<h2>Contoh Perbezaan Nada</h2>
-<div class="grid">
-<div class="word">妈<br>mā<br>Ibu</div>
-<div class="word">麻<br>má<br>Rami</div>
-<div class="word">马<br>mǎ<br>Kuda</div>
-<div class="word">骂<br>mà<br>Memarahi</div>
-</div>
-</div>
+                <!-- 6. Listen Mode -->
+                <div onclick="openListenMode()" class="bg-slate-900/80 border border-slate-800 hover:border-blue-400/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-300 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Listen Mode (Audio)</h3>
+                    <p class="text-slate-400 text-sm">Fokus mendengar sebutan audio penutur asli untuk kesemua frasa.</p>
+                </div>
+            </div>
+        </section>
 
-<div class="card">
-<h2>Asas Bunyi Pinyin</h2>
-<p><b>Initials (声母):</b> b, p, m, f, d, t, n, l, g, k, h, j, q, x, zh, ch, sh, r, z, c, s</p>
-<p><b>Finals (韵母):</b> a, o, e, i, u, ü, ai, ei, ao, ou, an, en, ang, eng, ong</p>
-<p>Belajar bunyi ini secara berperingkat sebelum membaca perkataan yang lebih sukar.</p>
-</div>
-</section>
+        <!-- ================= LEVEL SELECT SECTION ================= -->
+        <section id="section-levels" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Modul Pinyin & Levels (1 - 10)</h2>
+                    <p class="text-slate-400 text-sm">Pilih tahap untuk mula belajar sebutan dan kosa kata</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="levels-container"></div>
+        </section>
 
-<!-- 21 LEVELS -->
-<section id="levels" class="section">
-<div class="card">
-<h2>📚 21 Level Pembelajaran</h2>
-<p>Pilih level untuk membuka pelajaran. Mulakan dengan Level 1.</p>
-<div class="grid" id="levelGrid"></div>
-</div>
-<div class="card" id="lessonArea">
-<h2 id="lessonTitle">Pilih satu level</h2>
-<div id="lessonContent">Pelajaran Mandarin akan dipaparkan di sini.</div>
-</div>
-</section>
+        <!-- ================= SPECIAL CATEGORIES SECTION ================= -->
+        <section id="section-special" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Kategori Khas Tematik & Menu Makanan</h2>
+                    <p class="text-slate-400 text-sm">Pilih topik kosa kata khusus harian anda</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="special-container"></div>
+        </section>
 
-<!-- VOCABULARY -->
-<section id="vocab" class="section">
-<div class="card">
-<h2>📝 Mandarin Vocabulary</h2>
-<input id="search" placeholder="Cari perkataan Cina, Pinyin atau maksud BM..." oninput="searchVocab()">
-<div class="grid" id="vocabGrid"></div>
-</div>
-</section>
+        <!-- ================= CONVERSATION LAB SECTION ================= -->
+        <section id="section-conversation" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Conversation Lab (Dialog Situasi)</h2>
+                    <p class="text-slate-400 text-sm">Pilih situasi perbualan harian sebenar di China</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="conversation-container"></div>
+        </section>
 
-<!-- CONVERSATION -->
-<section id="conversation" class="section">
-<div class="card">
-<h2>💬 Daily Conversation</h2>
-<h3>1. Ucapan Salam</h3>
-<div class="word">
-<div class="han">你好！</div>
-<div class="py">Nǐ hǎo!</div>
-Hai!
-<button onclick="speak('你好')">🔊</button>
-</div>
-<div class="word">
-<div class="han">你好吗？</div>
-<div class="py">Nǐ hǎo ma?</div>
-Apa khabar?
-<button onclick="speak('你好吗')">🔊</button>
-</div>
-<div class="word">
-<div class="han">我很好，谢谢。</div>
-<div class="py">Wǒ hěn hǎo, xièxie.</div>
-Saya sangat baik, terima kasih.
-<button onclick="speak('我很好，谢谢')">🔊</button>
-</div>
-</div>
+        <!-- ================= GRAMMAR LAB SECTION ================= -->
+        <section id="section-grammar-lab" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Mandarin Grammar Lab (Tatabahasa)</h2>
+                    <p class="text-slate-400 text-sm">Formula asas struktur ayat Bahasa Mandarin</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grammar-lab-container"></div>
+        </section>
 
-<div class="card">
-<h3>2. Memperkenalkan Diri</h3>
-<div class="word">
-<div class="han">你叫什么名字？</div>
-<div class="py">Nǐ jiào shénme míngzi?</div>
-Siapa nama awak?
-<button onclick="speak('你叫什么名字')">🔊</button>
-</div>
-<div class="word">
-<div class="han">我叫小明。</div>
-<div class="py">Wǒ jiào Xiǎomíng.</div>
-Nama saya Xiao Ming.
-<button onclick="speak('我叫小明')">🔊</button>
-</div>
-<div class="word">
-<div class="han">很高兴认识你。</div>
-<div class="py">Hěn gāoxìng rènshi nǐ.</div>
-Gembira berkenalan dengan awak.
-<button onclick="speak('很高兴认识你')">🔊</button>
-</div>
-</div>
+        <!-- ================= STUDY SECTION ================= -->
+        <section id="section-study" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div class="flex items-center space-x-3">
+                    <button onclick="backFromStudy()" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div>
+                        <span id="study-level-badge" class="text-xs font-semibold text-red-400 bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">LEVEL 1</span>
+                        <h2 id="study-level-title" class="text-xl font-bold text-white">Asas Pinyin & Nada</h2>
+                    </div>
+                </div>
+                <div class="text-sm text-slate-400"><span id="study-progress-text">1 / 10</span></div>
+            </div>
 
-<div class="card">
-<h3>3. Membeli-belah</h3>
-<div class="word">
-<div class="han">多少钱？</div>
-<div class="py">Duōshao qián?</div>
-Berapa harganya?
-<button onclick="speak('多少钱')">🔊</button>
-</div>
-<div class="word">
-<div class="han">太贵了。</div>
-<div class="py">Tài guì le.</div>
-Terlalu mahal.
-<button onclick="speak('太贵了')">🔊</button>
-</div>
-<div class="word">
-<div class="han">我要这个。</div>
-<div class="py">Wǒ yào zhège.</div>
-Saya mahu yang ini.
-<button onclick="speak('我要这个')">🔊</button>
-</div>
-</div>
-</section>
+            <div class="max-w-2xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-xl text-center space-y-8">
+                <div class="relative inline-block w-full">
+                    <div class="w-44 h-44 md:w-52 md:h-52 mx-auto bg-slate-950 border-2 border-slate-700 rounded-3xl stroke-box flex items-center justify-center shadow-inner relative overflow-hidden group p-4">
+                        <span id="study-char" class="hanzi-font text-5xl md:text-6xl font-black text-amber-400 group-hover:scale-105 transition duration-300 text-center leading-snug">你好</span>
+                        <button onclick="playStudyAudio()" class="absolute bottom-2 right-2 w-10 h-10 bg-red-600 hover:bg-red-500 rounded-full flex items-center justify-center text-white shadow-lg transition" title="Dengar Audio">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                </div>
 
-<!-- GRAMMAR -->
-<section id="grammar" class="section">
-<div class="card">
-<h2>📖 Basic Mandarin Grammar</h2>
+                <div class="space-y-2">
+                    <div class="inline-block px-4 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-slate-200 text-lg font-bold">
+                        Pinyin: <span id="study-pinyin" class="text-red-400 font-extrabold">nǐ hǎo</span> | Maksud: <span id="study-meaning" class="text-amber-300">Apa khabar</span>
+                    </div>
+                    <p id="study-desc" class="text-slate-400 text-sm max-w-md mx-auto">Penerangan nota sebutan.</p>
+                </div>
 
-<h3>1. Kata ganti nama</h3>
-<p>我 (wǒ) = Saya</p>
-<p>你 (nǐ) = Awak</p>
-<p>他 (tā) = Dia lelaki</p>
-<p>她 (tā) = Dia perempuan</p>
-<p>我们 (wǒmen) = Kami / Kita</p>
+                <div class="bg-slate-950/80 rounded-2xl p-4 border border-slate-800 text-left space-y-2">
+                    <div class="flex items-center space-x-2 text-xs font-bold text-slate-400 uppercase tracking-wider">
+                        <i class="fa-solid fa-book-bookmark text-red-400"></i>
+                        <span>Nota & Contoh Penggunaan:</span>
+                    </div>
+                    <p id="study-stroke" class="text-sm text-slate-300 whitespace-pre-line">Panduan terperinci.</p>
+                </div>
 
-<hr>
-<h3>2. Kata kerja 是 (shì)</h3>
-<div class="big-chinese">我是学生。</div>
-<div class="pinyin">Wǒ shì xuésheng.</div>
-<p>Saya seorang pelajar.</p>
+                <div class="flex items-center justify-between pt-4">
+                    <button id="btn-prev-char" onclick="navigateStudy(-1)" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-sm transition">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Sebelum
+                    </button>
+                    <button id="btn-next-char" onclick="navigateStudy(1)" class="px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-sm transition">
+                        Seterusnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
 
-<hr>
-<h3>3. Membina soalan dengan 吗 (ma)</h3>
-<div class="big-chinese">你是学生吗？</div>
-<div class="pinyin">Nǐ shì xuésheng ma?</div>
-<p>Adakah awak seorang pelajar?</p>
+            <div class="text-center pt-4">
+                <button onclick="startQuizForCurrentModule()" class="px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-2xl shadow-lg transition">
+                    <i class="fa-solid fa-pen-to-square mr-2"></i> Mula Practice (Kuiz) Modul Ini
+                </button>
+            </div>
+        </section>
 
-<hr>
-<h3>4. Penafian 不 (bù)</h3>
-<div class="big-chinese">我不是老师。</div>
-<div class="pinyin">Wǒ bú shì lǎoshī.</div>
-<p>Saya bukan guru.</p>
+        <!-- ================= QUIZ SECTION ================= -->
+        <section id="section-quiz" class="hidden space-y-6 transition-all duration-300">
+            <div class="max-w-xl mx-auto space-y-2">
+                <div class="flex justify-between text-xs text-slate-400 font-bold">
+                    <span id="quiz-title-mode">PRACTICE KUIZ</span>
+                    <span id="quiz-progress-text">1 / 10</span>
+                </div>
+                <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-red-500 to-amber-400 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
 
-<hr>
-<h3>5. Kata tanya 什么 (shénme)</h3>
-<div class="big-chinese">这是什么？</div>
-<div class="pinyin">Zhè shì shénme?</div>
-<p>Apakah ini?</p>
-</div>
-</section>
+            <div class="max-w-xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl text-center space-y-6">
+                <div class="space-y-1 relative">
+                    <span id="quiz-instruction-label" class="text-xs font-bold text-red-400 uppercase tracking-wider">Apakah pinyin atau maksud bagi perkataan ini?</span>
+                    <div class="flex items-center justify-center space-x-3 pt-2">
+                        <div id="quiz-char-display" class="hanzi-font text-4xl md:text-5xl font-black text-amber-400">你好</div>
+                        <button onclick="playQuizAudio()" class="w-10 h-10 bg-red-600 hover:bg-red-500 rounded-full flex items-center justify-center text-white shadow-lg transition" title="Dengar Audio">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                </div>
 
-<!-- WRITING -->
-<section id="writing" class="section">
-<div class="card">
-<h2>✍️ Chinese Writing Practice</h2>
-<p>Belajar mengenali dan menulis aksara Cina.</p>
-<div class="grid">
-<div class="word"><div class="han">一</div>yī<br>Satu</div>
-<div class="word"><div class="han">二</div>èr<br>Dua</div>
-<div class="word"><div class="han">三</div>sān<br>Tiga</div>
-<div class="word"><div class="han">人</div>rén<br>Orang</div>
-<div class="word"><div class="han">大</div>dà<br>Besar</div>
-<div class="word"><div class="han">小</div>xiǎo<br>Kecil</div>
-<div class="word"><div class="han">山</div>shān<br>Gunung</div>
-<div class="word"><div class="han">水</div>shuǐ<br>Air</div>
-</div>
-<h3>Latihan menulis</h3>
-<p>Tulis aksara berikut pada kertas atau buku latihan:</p>
-<div class="big-chinese" id="writingWord">你</div>
-<div class="pinyin" id="writingPy">Nǐ</div>
-<button class="btn" onclick="nextWriting()">Perkataan Seterusnya →</button>
-</div>
-</section>
+                <div id="quiz-options-grid" class="grid grid-cols-2 gap-3"></div>
+                <div id="quiz-feedback" class="hidden p-3 rounded-xl text-center text-sm font-bold"></div>
+            </div>
+        </section>
 
-<!-- QUIZ -->
-<section id="quiz" class="section">
-<div class="card">
-<h2>🎯 Mandarin Quiz</h2>
-<p id="qNumber">Soalan 1</p>
-<h3 id="question"></h3>
-<div id="answers"></div>
-<div id="feedback"></div>
-<button class="btn" id="nextBtn" style="display:none" onclick="nextQ()">Soalan Seterusnya →</button>
-<p id="score"></p>
-</div>
-</section>
+        <!-- ================= WORDS DICTIONARY SECTION ================= -->
+        <section id="section-words" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Kamus Indeks Mandarin (Words)</h2>
+                    <p class="text-slate-400 text-sm">Cari dan semak Hanzi, Pinyin & Maksud</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl">
+                <input type="text" id="word-search" oninput="filterWords()" placeholder="Cari Hanzi, Pinyin atau Maksud..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-red-500">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="words-grid"></div>
+        </section>
 
-</div>
+        <!-- ================= LISTEN MODE SECTION ================= -->
+        <section id="section-listen" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Listen Mode (Latihan Mendengar Audio)</h2>
+                    <p class="text-slate-400 text-sm">Dengar sebutan penutur asli</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
 
-<footer>
-<p>🌸 Mandarin Master 🌸</p>
-<p>Learn Mandarin at Your Own Pace</p>
-<p>中文学习 · 加油！</p>
-</footer>
+            <div class="max-w-xl mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl text-center space-y-6">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Mod Dengar Audio</span>
+                    <div id="listen-char" class="hanzi-font text-5xl font-black text-amber-400 py-4">你好</div>
+                    <div id="listen-pinyin" class="text-lg font-bold text-red-400">nǐ hǎo</div>
+                    <p id="listen-desc" class="text-slate-400 text-sm">Apa khabar</p>
+                </div>
 
-<script>
-// NAVIGATION
-function tab(id,button){
- document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
- button.classList.add('active');
-}
+                <div class="flex justify-center pt-2">
+                    <button onclick="playListenAudio()" class="px-8 py-4 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-bold shadow-lg shadow-red-600/30 transition flex items-center space-x-3 text-lg">
+                        <i class="fa-solid fa-volume-high text-2xl"></i>
+                        <span>Dengar Sebutan 🔊</span>
+                    </button>
+                </div>
 
-// MANDARIN AUDIO
-function speak(text){
- if(!window.speechSynthesis){
-  alert('Audio tidak disokong oleh pelayar ini.');
-  return;
- }
- speechSynthesis.cancel();
- let utterance=new SpeechSynthesisUtterance(text);
- utterance.lang='zh-CN';
- utterance.rate=0.8;
- speechSynthesis.speak(utterance);
-}
+                <div class="flex justify-between pt-6 border-t border-slate-800">
+                    <button onclick="navigateListen(-1)" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold">Sebelum</button>
+                    <span id="listen-progress" class="text-slate-400 text-sm font-bold flex items-center">1 / 100</span>
+                    <button onclick="navigateListen(1)" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-semibold">Seterusnya</button>
+                </div>
+            </div>
+        </section>
 
-// 21 LEVELS
-const lessons=[
- {title:'Asas Salam',words:[['你好','Nǐ hǎo','Hello'],['谢谢','Xièxie','Terima kasih'],['再见','Zàijiàn','Selamat tinggal']]},
- {title:'Memperkenalkan Diri',words:[['我','Wǒ','Saya'],['你','Nǐ','Awak'],['名字','Míngzi','Nama']]},
- {title:'Nombor 1–10',words:[['一','Yī','Satu'],['二','Èr','Dua'],['三','Sān','Tiga'],['四','Sì','Empat'],['五','Wǔ','Lima'],['六','Liù','Enam'],['七','Qī','Tujuh'],['八','Bā','Lapan'],['九','Jiǔ','Sembilan'],['十','Shí','Sepuluh']]},
- {title:'Keluarga',words:[['爸爸','Bàba','Ayah'],['妈妈','Māma','Ibu'],['哥哥','Gēge','Abang'],['姐姐','Jiějie','Kakak']]},
- {title:'Warna',words:[['红色','Hóngsè','Merah'],['蓝色','Lánsè','Biru'],['白色','Báisè','Putih'],['黑色','Hēisè','Hitam']]},
- {title:'Makanan',words:[['米饭','Mǐfàn','Nasi'],['面条','Miàntiáo','Mi'],['鸡肉','Jīròu','Ayam'],['水果','Shuǐguǒ','Buah']]},
- {title:'Minuman',words:[['水','Shuǐ','Air'],['茶','Chá','Teh'],['咖啡','Kāfēi','Kopi'],['牛奶','Niúnǎi','Susu']]},
- {title:'Hari dan Masa',words:[['今天','Jīntiān','Hari ini'],['明天','Míngtiān','Esok'],['昨天','Zuótiān','Semalam'],['现在','Xiànzài','Sekarang']]},
- {title:'Hari dalam Minggu',words:[['星期一','Xīngqī yī','Isnin'],['星期二','Xīngqī èr','Selasa'],['星期三','Xīngqī sān','Rabu'],['星期日','Xīngqī rì','Ahad']]},
- {title:'Tempat',words:[['家','Jiā','Rumah'],['学校','Xuéxiào','Sekolah'],['医院','Yīyuàn','Hospital'],['商店','Shāngdiàn','Kedai']]},
- {title:'Haiwan',words:[['猫','Māo','Kucing'],['狗','Gǒu','Anjing'],['鸟','Niǎo','Burung'],['鱼','Yú','Ikan']]},
- {title:'Anggota Badan',words:[['头','Tóu','Kepala'],['眼睛','Yǎnjing','Mata'],['手','Shǒu','Tangan'],['脚','Jiǎo','Kaki']]},
- {title:'Kata Kerja',words:[['吃','Chī','Makan'],['喝','Hē','Minum'],['看','Kàn','Melihat'],['听','Tīng','Mendengar']]},
- {title:'Kata Sifat',words:[['好','Hǎo','Baik'],['大','Dà','Besar'],['小','Xiǎo','Kecil'],['漂亮','Piàoliang','Cantik']]},
- {title:'Perasaan',words:[['开心','Kāixīn','Gembira'],['难过','Nánguò','Sedih'],['累','Lèi','Penat'],['生气','Shēngqì','Marah']]},
- {title:'Membeli-belah',words:[['多少钱','Duōshao qián','Berapa harga'],['便宜','Piányi','Murah'],['贵','Guì','Mahal'],['买','Mǎi','Beli']]},
- {title:'Pengangkutan',words:[['汽车','Qìchē','Kereta'],['巴士','Bāshì','Bas'],['火车','Huǒchē','Kereta api'],['飞机','Fēijī','Kapal terbang']]},
- {title:'Cuaca',words:[['天气','Tiānqì','Cuaca'],['晴天','Qíngtiān','Cerah'],['下雨','Xiàyǔ','Hujan'],['热','Rè','Panas']]},
- {title:'Kesihatan',words:[['医生','Yīshēng','Doktor'],['药','Yào','Ubat'],['身体','Shēntǐ','Badan'],['不舒服','Bù shūfu','Tidak sihat']]},
- {title:'Perbualan Harian',words:[['请问','Qǐngwèn','Tumpang tanya'],['没关系','Méi guānxi','Tidak mengapa'],['可以','Kěyǐ','Boleh'],['我不知道','Wǒ bù zhīdào','Saya tidak tahu']]},
- {title:'Ayat dan Ulang Kaji',words:[['我喜欢中文','Wǒ xǐhuan Zhōngwén','Saya suka Bahasa Cina'],['你吃饭了吗','Nǐ chīfàn le ma','Awak sudah makan?'],['我想学习','Wǒ xiǎng xuéxí','Saya mahu belajar'],['再见','Zàijiàn','Selamat tinggal']]}
-];
+        <!-- ================= RESULT SECTION ================= -->
+        <section id="section-result" class="hidden space-y-6 text-center transition-all duration-300">
+            <div class="max-w-md mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl space-y-6">
+                <div class="w-20 h-20 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-4xl">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="space-y-1">
+                    <h2 class="text-2xl font-bold text-white">Tahniah Selesai Practice!</h2>
+                    <p class="text-slate-400 text-sm">Prestasi latihan anda telah direkodkan.</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex justify-around">
+                    <div>
+                        <div class="text-xs text-slate-400">Markah</div>
+                        <div id="result-score" class="text-2xl font-black text-emerald-400">80%</div>
+                    </div>
+                    <div class="h-8 w-px bg-slate-800"></div>
+                    <div>
+                        <div class="text-xs text-slate-400">Mata</div>
+                        <div id="result-points" class="text-2xl font-black text-amber-400">+50</div>
+                    </div>
+                </div>
+                <button onclick="showSection('home')" class="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold transition">
+                    Kembali Ke Menu Utama
+                </button>
+            </div>
+        </section>
 
-let completed=JSON.parse(localStorage.getItem('mandarinLevels')||'[]');
+    </main>
 
-function updateProgress(){
- document.getElementById('done').textContent=completed.length;
- let p=Math.round(completed.length/21*100);
- document.getElementById('bar').style.width=p+'%';
- document.getElementById('percent').textContent=p+'% selesai';
-}
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 bg-slate-900/50 text-center text-slate-500 text-xs">
+        <p>Mandarin Master Ultimate Edition &copy; 2026 - Semua Hak Cipta Terpelihara</p>
+    </footer>
 
-function buildLevels(){
- document.getElementById('levelGrid').innerHTML=lessons.map((l,i)=>`
- <div class="level" onclick="openLesson(${i})">
- <b>Level ${i+1}</b><br>${l.title}
- <p>${completed.includes(i)?'✓ Selesai':'Belum selesai'}</p>
- </div>`).join('');
-}
+    <!-- JavaScript Platform -->
+    <script>
+        const visualEmojiMap = {
+            "苹果": "🍎", "猫": "🐱", "水": "💧", "咖啡": "☕", "家": "🏠", "书": "📚",
+            "狗": "🐶", "鸟": "🐦", "钱": "💵", "月亮": "🌙", "星星": "⭐", "花": "🌸",
+            "面条": "🍜", "炒饭": "🍛", "饺子": "🥟", "包子": "🥠", "茶": "🍵", "啤酒": "🍺"
+        };
 
-function openLesson(i){
- let l=lessons[i];
- document.getElementById('lessonTitle').textContent='Level '+(i+1)+': '+l.title;
- document.getElementById('lessonContent').innerHTML=`
- <div class="grid">
- ${l.words.map(w=>`
- <div class="word">
- <div class="han">${w[0]}</div>
- <div class="py">${w[1]}</div>
- <div>${w[2]}</div>
- <button onclick="speak('${w[0]}')">🔊 Dengar</button>
- </div>`).join('')}
- </div>
- <br><button class="btn" onclick="completeLevel(${i})">✓ Selesaikan Level Ini</button>`;
-}
+        const levelsData = [
+            {
+                id: 1,
+                title: "Level 1: 4 Nada & Pinyin Asas",
+                desc: "Pengenalan nada suara (1 hingga 4) dan vokal asas.",
+                items: [
+                    { char: "ā", pinyin: "ā", meaning: "Nada 1 (Datar/Tinggi)", note: "Sebutan tinggi mendatar tanpa turun naik.\nContoh: māl (Ibu)" },
+                    { char: "á", pinyin: "á", meaning: "Nada 2 (Menaik)", note: "Sebutan bermula dari aras sederhana naik ke atas.\nContoh: má (Rami)" },
+                    { char: "ǎ", pinyin: "ǎ", meaning: "Nada 3 (Turun kemudian naik)", note: "Sebutan turun sedikit ke bawah lalu melengkung naik.\nContoh: mǎ (Kuda)" },
+                    { char: "à", pinyin: "à", meaning: "Nada 4 (Menurun tajam)", note: "Sebutan menyentak turun dengan tegas.\nContoh: mà (Marah)" }
+                ]
+            }
+        ];
 
-function completeLevel(i){
- if(!completed.includes(i)){
-  completed.push(i);
-  localStorage.setItem('mandarinLevels',JSON.stringify(completed));
- }
- updateProgress();
- buildLevels();
- alert('Tahniah! Level selesai! 🌸');
-}
-buildLevels();
-updateProgress();
+        // Kategori Tematik termasuk Menu Makanan & Minuman Cina Baharu
+        const specialCategoriesData = [
+            {
+                id: 'sc-numbers',
+                title: "1. Nombor & Kiraan (数字)",
+                desc: "Nombor 1 hingga 5 dan angka asas.",
+                items: [
+                    { char: "一", pinyin: "yī", meaning: "Satu (1)", note: "Nombor satu" },
+                    { char: "二", pinyin: "èr", meaning: "Dua (2)", note: "Nombor dua" },
+                    { char: "三", pinyin: "sān", meaning: "Tiga (3)", note: "Nombor tiga" },
+                    { char: "四", pinyin: "sì", meaning: "Empat (4)", note: "Nombor empat" },
+                    { char: "五", pinyin: "wǔ", meaning: "Lima (5)", note: "Nombor lima" }
+                ]
+            },
+            {
+                id: 'sc-food-drinks',
+                title: "2. Menu Makanan & Minuman Cina (中餐与饮品)",
+                desc: "Senarai hidangan popular Cina, mi, dumpling & minuman.",
+                items: [
+                    { char: "面条", pinyin: "miàntiáo", meaning: "Mi / Mee", note: "Hidangan mi sup atau goreng." },
+                    { char: "炒饭", pinyin: "chǎofàn", meaning: "Nasi goreng", note: "Nasi goreng Cina." },
+                    { char: "饺子", pinyin: "jiǎozi", meaning: "Dumpling / Gyoza", note: "Pau/dumpling isi daging." },
+                    { char: "包子", pinyin: "bāozi", meaning: "Pau berinti", note: "Pau kukus." },
+                    { char: "火锅", pinyin: "huǒguō", meaning: "Hotpot / Steamboat", note: "Hidangan sup panas." },
+                    { char: "茶", pinyin: "chá", meaning: "Teh Cina", note: "Minuman tradisional." },
+                    { char: "啤酒", pinyin: "píjiǔ", meaning: "Bir (Beer)", note: "Minuman beralkohol." },
+                    { char: "果汁", pinyin: "guǒzhī", meaning: "Jus buah-buahan", note: "Minuman segar." },
+                    { char: "水", pinyin: "shuǐ", meaning: "Air kosong", note: "Keperluan asas." },
+                    { char: "咖啡", pinyin: "kāfēi", meaning: "Kopi", note: "Minuman berkafein." }
+                ]
+            }
+        ];
 
-// VOCABULARY
-const vocab=[
- ...lessons.flatMap(l=>l.words),
- ['老师','Lǎoshī','Guru'],
- ['学生','Xuésheng','Pelajar'],
- ['朋友','Péngyou','Kawan'],
- ['爱','Ài','Cinta / Sayang'],
- ['书','Shū','Buku'],
- ['钱','Qián','Wang'],
- ['手机','Shǒujī','Telefon'],
- ['工作','Gōngzuò','Kerja'],
- ['学习','Xuéxí','Belajar']
-];
+        const conversationLabData = [
+            {
+                id: 'cv-1',
+                title: "Situasi 1: Memesan Makanan di Restoran (在餐厅点菜)",
+                desc: "Frasa penting untuk memesan makanan dan minuman Cina.",
+                items: [
+                    { char: "我要点菜。", pinyin: "Wǒ yào diǎncài.", meaning: "Saya mahu memesan makanan.", note: "Panggilan menu" },
+                    { char: "请给我一碗面条。", pinyin: "Qǐng gěi wǒ yì wǎn miàntiáo.", meaning: "Tolong beri saya semangkuk mi.", note: "Pesanan mi" },
+                    { char: "这个多少钱？", pinyin: "Zhèige duōshǎo qián?", meaning: "Berapa harga ini?", note: "Tanya harga" },
+                    { char: "买单 / 结账", pinyin: "Mǎidān / Jiézhàng", meaning: "Tolong kira bil / Bayar.", note: "Pembayaran" }
+                ]
+            }
+        ];
 
-function renderVocab(data){
- document.getElementById('vocabGrid').innerHTML=data.map(w=>`
- <div class="word">
- <div class="han">${w[0]}</div>
- <div class="py">${w[1]}</div>
- <div>${w[2]}</div>
- <button onclick="speak('${w[0]}')">🔊 Dengar</button>
- </div>`).join('');
-}
-function searchVocab(){
- let q=document.getElementById('search').value.toLowerCase();
- renderVocab(vocab.filter(w=>w.join(' ').toLowerCase().includes(q)));
-}
-renderVocab(vocab);
+        const grammarLabData = [
+            {
+                id: 'g1',
+                title: "1. Susunan Asas Ayat Mandarin (SVO)",
+                desc: "Formula Subjek + Kata Kerja + Objek.",
+                items: [
+                    { char: "我吃面条。", pinyin: "Wǒ chī miàntiáo.", meaning: "Saya makan mi.", note: "Subjek (我) + Kerja (吃) + Objek (面条)." }
+                ]
+            }
+        ];
 
-// WRITING PRACTICE
-const writing=[['你','Nǐ'],['我','Wǒ'],['好','Hǎo'],['人','Rén'],['大','Dà'],['小','Xiǎo'],['水','Shuǐ'],['山','Shān'],['天','Tiān'],['日','Rì']];
-let wi=0;
-function nextWriting(){
- wi=(wi+1)%writing.length;
- document.getElementById('writingWord').textContent=writing[wi][0];
- document.getElementById('writingPy').textContent=writing[wi][1];
-}
+        let userScore = 0;
+        let currentLevelObj = null;
+        let currentStudyIndex = 0;
+        let currentQuizIndex = 0;
+        let quizScoreCount = 0;
+        let activeQuizItems = [];
+        let allWords = [];
+        let currentListenIndex = 0;
 
-// QUIZ
-const questions=[
- {q:'Apakah maksud 你好?',a:['Terima kasih','Hello','Selamat tinggal'],c:1},
- {q:'Bagaimana menyebut Terima kasih?',a:['Xièxie','Nǐ hǎo','Zàijiàn'],c:0},
- {q:'Apakah maksud 我?',a:['Awak','Dia','Saya'],c:2},
- {q:'Apakah maksud 水?',a:['Air','Api','Buku'],c:0},
- {q:'Apakah maksud 妈妈?',a:['Ayah','Ibu','Kakak'],c:1},
- {q:'Apakah maksud 再见?',a:['Hai','Maaf','Selamat tinggal'],c:2},
- {q:'Apakah maksud 猫?',a:['Kucing','Anjing','Burung'],c:0},
- {q:'Apakah maksud 爱?',a:['Benci','Cinta','Marah'],c:1},
- {q:'Apakah maksud 学生?',a:['Guru','Doktor','Pelajar'],c:2},
- {q:'Apakah maksud 谢谢?',a:['Terima kasih','Sama-sama','Selamat pagi'],c:0}
-];
+        window.addEventListener('DOMContentLoaded', () => {
+            renderLevelCards();
+            renderSpecialCategoryCards();
+            renderConversationCards();
+            renderGrammarLabCards();
+            buildAllWordsList();
+            showSection('home');
+        });
 
-let qi=0,score=0,answered=false;
+        function showSection(sectionId) {
+            ['home', 'levels', 'special', 'conversation', 'grammar-lab', 'study', 'quiz', 'words', 'listen', 'result'].forEach(id => {
+                const el = document.getElementById(`section-${id}`);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(`section-${sectionId}`);
+            if (target) target.classList.remove('hidden');
+        }
 
-function loadQ(){
- answered=false;
- let q=questions[qi];
- document.getElementById('qNumber').textContent='Soalan '+(qi+1)+' / '+questions.length;
- document.getElementById('question').textContent=q.q;
- document.getElementById('answers').innerHTML=q.a.map((a,i)=>
- `<button class="option" onclick="answer(${i})">${a}</button>`).join('');
- document.getElementById('feedback').textContent='';
- document.getElementById('nextBtn').style.display='none';
-}
+        function renderLevelCards() {
+            const container = document.getElementById('levels-container');
+            container.innerHTML = '';
+            levelsData.forEach(lvl => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-6 space-y-4 shadow-lg transition";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="px-3 py-1 bg-red-500/10 text-red-400 text-xs font-bold rounded-full border border-red-500/20">LEVEL ${lvl.id}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-white mb-1">${lvl.title}</h3>
+                        <p class="text-slate-400 text-sm">${lvl.desc}</p>
+                    </div>
+                    <button onclick="startLevel(${lvl.id})" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition flex items-center justify-center space-x-2">
+                        <span>Mula Study & Practice</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-function answer(i){
- if(answered)return;
- answered=true;
- let q=questions[qi];
- if(i===q.c){
-  score++;
-  document.getElementById('feedback').textContent='✓ Betul! Bagus sekali!';
-  document.getElementById('feedback').style.color='green';
- }else{
-  document.getElementById('feedback').textContent='✗ Jawapan betul: '+q.a[q.c];
-  document.getElementById('feedback').style.color='#d27e9d';
- }
- document.getElementById('score').textContent='Markah: '+score;
- document.getElementById('nextBtn').style.display='inline-block';
-}
+        function renderSpecialCategoryCards() {
+            const container = document.getElementById('special-container');
+            container.innerHTML = '';
+            specialCategoriesData.forEach(sc => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 space-y-4 shadow-lg transition";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-bold rounded-full border border-amber-500/20">TEMATIK & MENU</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-white mb-1">${sc.title}</h3>
+                        <p class="text-slate-400 text-sm">${sc.desc}</p>
+                    </div>
+                    <button onclick="startSpecialCategory('${sc.id}')" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition flex items-center justify-center space-x-2">
+                        <span>Teroka Kategori Ini</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-function nextQ(){
- qi++;
- if(qi<questions.length){
-  loadQ();
- }else{
-  document.getElementById('question').textContent='Quiz Selesai! 🎉';
-  document.getElementById('answers').innerHTML='';
-  document.getElementById('feedback').textContent='Markah akhir: '+score+' / '+questions.length;
-  document.getElementById('nextBtn').textContent='Cuba Lagi';
-  document.getElementById('nextBtn').onclick=()=>{
-   qi=0;score=0;
-   document.getElementById('score').textContent='';
-   document.getElementById('nextBtn').textContent='Soalan Seterusnya →';
-   document.getElementById('nextBtn').onclick=nextQ;
-   loadQ();
-  };
- }
-}
-loadQ();
-</script>
+        function renderConversationCards() {
+            const container = document.getElementById('conversation-container');
+            container.innerHTML = '';
+            conversationLabData.forEach(cv => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 hover:border-pink-500/50 rounded-2xl p-6 space-y-4 shadow-lg transition";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="px-3 py-1 bg-pink-500/10 text-pink-400 text-xs font-bold rounded-full border border-pink-500/20">DIALOG</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-white mb-1">${cv.title}</h3>
+                        <p class="text-slate-400 text-sm">${cv.desc}</p>
+                    </div>
+                    <button onclick="startConversation('${cv.id}')" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition flex items-center justify-center space-x-2">
+                        <span>Mula Belajar Dialog</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
 
+        function renderGrammarLabCards() {
+            const container = document.getElementById('grammar-lab-container');
+            container.innerHTML = '';
+            grammarLabData.forEach(g => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 hover:border-emerald-500/50 rounded-2xl p-6 space-y-4 shadow-lg transition";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/20">TATABAHASA</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-xl text-white mb-1">${g.title}</h3>
+                        <p class="text-slate-400 text-sm">${g.desc}</p>
+                    </div>
+                    <button onclick="startGrammarLab('${g.id}')" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition flex items-center justify-center space-x-2">
+                        <span>Buka Makmal Tatabahasa</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openSpecialMenu() { showSection('special'); }
+        function openConversationMenu() { showSection('conversation'); }
+        function openGrammarLabMenu() { showSection('grammar-lab'); }
+
+        function startLevel(levelId) {
+            currentLevelObj = levelsData.find(l => l.id === levelId);
+            currentStudyIndex = 0;
+            updateStudyCard();
+            showSection('study');
+        }
+
+        function startSpecialCategory(scId) {
+            currentLevelObj = specialCategoriesData.find(sc => sc.id === scId);
+            currentStudyIndex = 0;
+            updateStudyCard();
+            showSection('study');
+        }
+
+        function startConversation(cvId) {
+            currentLevelObj = conversationLabData.find(cv => cv.id === cvId);
+            currentStudyIndex = 0;
+            updateStudyCard();
+            showSection('study');
+        }
+
+        function startGrammarLab(gId) {
+            currentLevelObj = grammarLabData.find(g => g.id === gId);
+            currentStudyIndex = 0;
+            updateStudyCard();
+            showSection('study');
+        }
+
+        function backFromStudy() {
+            if (specialCategoriesData.some(sc => sc.id === currentLevelObj.id)) {
+                showSection('special');
+            } else if (conversationLabData.some(cv => cv.id === currentLevelObj.id)) {
+                showSection('conversation');
+            } else if (grammarLabData.some(g => g.id === currentLevelObj.id)) {
+                showSection('grammar-lab');
+            } else {
+                showSection('levels');
+            }
+        }
+
+        function updateStudyCard() {
+            if (!currentLevelObj) return;
+            const item = currentLevelObj.items[currentStudyIndex];
+            
+            if (specialCategoriesData.some(sc => sc.id === currentLevelObj.id)) {
+                document.getElementById('study-level-badge').innerText = "KATEGORI TEMATIK";
+            } else if (conversationLabData.some(cv => cv.id === currentLevelObj.id)) {
+                document.getElementById('study-level-badge').innerText = "CONVERSATION LAB";
+            } else if (grammarLabData.some(g => g.id === currentLevelObj.id)) {
+                document.getElementById('study-level-badge').innerText = "GRAMMAR LAB";
+            } else {
+                document.getElementById('study-level-badge').innerText = `LEVEL ${currentLevelObj.id}`;
+            }
+
+            document.getElementById('study-level-title').innerText = currentLevelObj.title;
+            document.getElementById('study-progress-text').innerText = `${currentStudyIndex + 1} / ${currentLevelObj.items.length}`;
+
+            const charEl = document.getElementById('study-char');
+            charEl.innerText = item.char;
+
+            document.getElementById('study-pinyin').innerText = item.pinyin;
+            document.getElementById('study-meaning').innerText = item.meaning;
+            document.getElementById('study-desc').innerText = item.meaning;
+            document.getElementById('study-stroke').innerText = item.note;
+
+            document.getElementById('btn-prev-char').disabled = (currentStudyIndex === 0);
+            document.getElementById('btn-next-char').style.display = (currentStudyIndex === currentLevelObj.items.length - 1) ? 'none' : 'inline-flex';
+        }
+
+        function navigateStudy(dir) {
+            currentStudyIndex += dir;
+            if (currentStudyIndex < 0) currentStudyIndex = 0;
+            if (currentStudyIndex >= currentLevelObj.items.length) currentStudyIndex = currentLevelObj.items.length - 1;
+            updateStudyCard();
+        }
+
+        function playStudyAudio() {
+            const item = currentLevelObj.items[currentStudyIndex];
+            speakText(item.char);
+        }
+
+        function playQuizAudio() {
+            const item = activeQuizItems[currentQuizIndex];
+            speakText(item.char);
+        }
+
+        function speakText(txt) {
+            const utterance = new SpeechSynthesisUtterance(txt);
+            utterance.lang = 'zh-CN';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function startQuizForCurrentModule() {
+            activeQuizItems = [...currentLevelObj.items];
+            currentQuizIndex = 0;
+            quizScoreCount = 0;
+            document.getElementById('quiz-title-mode').innerText = `PRACTICE: ${currentLevelObj.title}`;
+            showSection('quiz');
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            if (currentQuizIndex >= activeQuizItems.length) {
+                finishQuiz();
+                return;
+            }
+
+            const currentItem = activeQuizItems[currentQuizIndex];
+            document.getElementById('quiz-progress-text').innerText = `${currentQuizIndex + 1} / ${activeQuizItems.length}`;
+            document.getElementById('quiz-progress-bar').style.width = `${((currentQuizIndex + 1) / activeQuizItems.length) * 100}%`;
+            
+            document.getElementById('quiz-char-display').innerText = currentItem.char;
+
+            const optionsGrid = document.getElementById('quiz-options-grid');
+            optionsGrid.innerHTML = '';
+            document.getElementById('quiz-feedback').classList.add('hidden');
+
+            let options = [currentItem.meaning];
+            let pool = currentLevelObj ? currentLevelObj.items : allWords;
+            while (options.length < 4 && options.length < pool.length) {
+                let rand = pool[Math.floor(Math.random() * pool.length)].meaning;
+                if (!options.includes(rand)) options.push(rand);
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "py-3.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold border border-slate-700 transition text-xs md:text-sm shadow-md";
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(opt, currentItem.meaning, btn);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selected, correct, btnEl) {
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+
+            if (selected === correct) {
+                quizScoreCount++;
+                feedback.className = "p-3 rounded-xl text-center text-sm font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30";
+                feedback.innerText = "Betul! Syabas 🎉";
+                btnEl.classList.add('bg-emerald-600', 'border-emerald-500');
+            } else {
+                feedback.className = "p-3 rounded-xl text-center text-sm font-bold bg-red-500/20 text-red-400 border border-red-500/30";
+                feedback.innerText = `Salah. Jawapan: ${correct}`;
+                btnEl.classList.add('bg-red-600', 'border-red-500');
+            }
+
+            setTimeout(() => {
+                currentQuizIndex++;
+                loadQuizQuestion();
+            }, 1200);
+        }
+
+        function finishQuiz() {
+            const total = activeQuizItems.length;
+            const percentage = Math.round((quizScoreCount / total) * 100);
+            const pointsEarned = quizScoreCount * 5;
+            userScore += pointsEarned;
+            document.getElementById('stat-score').innerText = userScore;
+
+            document.getElementById('result-score').innerText = `${percentage}%`;
+            document.getElementById('result-points').innerText = `+${pointsEarned}`;
+            showSection('result');
+            if (percentage >= 70) confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        }
+
+        function buildAllWordsList() {
+            allWords = [];
+            levelsData.forEach(lvl => { lvl.items.forEach(it => allWords.push({...it})); });
+            specialCategoriesData.forEach(sc => { sc.items.forEach(it => allWords.push({...it})); });
+            conversationLabData.forEach(cv => { cv.items.forEach(it => allWords.push({...it})); });
+            grammarLabData.forEach(g => { g.items.forEach(it => allWords.push({...it})); });
+        }
+
+        function openWordsMode() {
+            showSection('words');
+            renderWords(allWords);
+        }
+
+        function renderWords(list) {
+            const grid = document.getElementById('words-grid');
+            grid.innerHTML = '';
+            list.forEach(w => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 p-4 rounded-xl flex justify-between items-center";
+                card.innerHTML = `
+                    <div>
+                        <div class="hanzi-font text-xl font-bold text-amber-400">${w.char}</div>
+                        <div class="text-xs text-red-400 font-semibold">${w.pinyin} - ${w.meaning}</div>
+                    </div>
+                    <button onclick="speakText('${w.char}')" class="w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg text-white flex items-center justify-center">
+                        <i class="fa-solid fa-volume-high text-xs"></i>
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterWords() {
+            const query = document.getElementById('word-search').value.toLowerCase();
+            const filtered = allWords.filter(w => w.char.includes(query) || w.pinyin.toLowerCase().includes(query) || w.meaning.toLowerCase().includes(query));
+            renderWords(filtered);
+        }
+
+        function openListenMode() {
+            currentListenIndex = 0;
+            showSection('listen');
+            updateListenCard();
+        }
+
+        function updateListenCard() {
+            const item = allWords[currentListenIndex];
+            if (!item) return;
+            document.getElementById('listen-char').innerText = item.char;
+            document.getElementById('listen-pinyin').innerText = item.pinyin;
+            document.getElementById('listen-desc').innerText = item.meaning;
+            document.getElementById('listen-progress').innerText = `${currentListenIndex + 1} / ${allWords.length}`;
+        }
+
+        function navigateListen(dir) {
+            currentListenIndex += dir;
+            if (currentListenIndex < 0) currentListenIndex = 0;
+            if (currentListenIndex >= allWords.length) currentListenIndex = allWords.length - 1;
+            updateListenCard();
+        }
+
+        function playListenAudio() {
+            const item = allWords[currentListenIndex];
+            if (item) speakText(item.char);
+        }
+    </script>
 </body>
 </html>
