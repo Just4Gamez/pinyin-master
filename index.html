@@ -68,7 +68,7 @@
                 <div class="relative z-10 max-w-2xl mx-auto space-y-4">
                     <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30 uppercase tracking-wider">Kurikulum Pinyin, Hanzi & Makanan Cina</span>
                     <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Kuasai Bahasa Mandarin Sepenuhnya</h2>
-                    <p class="text-slate-300 text-sm md:text-base">Pilih tahap Pinyin, Kategori Tematik & Menu Makanan Cina, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
+                    <p class="text-slate-300 text-sm md:text-base">Pilih tahap Pinyin (1 hingga 10), Kategori Tematik & Menu Makanan, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
                         <i class="fa-solid fa-graduation-cap"></i>
                     </div>
                     <h3 class="font-bold text-lg text-white">Pinyin & Levels (1-10)</h3>
-                    <p class="text-slate-400 text-sm">Belajar nada suara, initial, final, dan kosa kata asas berperingkat.</p>
+                    <p class="text-slate-400 text-sm">Belajar nada suara, initial, final, dan kosa kata asas lengkap 10 tahap.</p>
                 </div>
 
                 <!-- 2. Special Categories -->
@@ -372,6 +372,7 @@
             "面条": "🍜", "炒饭": "🍛", "饺子": "🥟", "包子": "🥠", "茶": "🍵", "啤酒": "🍺"
         };
 
+        // Lengkap 10 Level Pembelajaran Berperingkat
         const levelsData = [
             {
                 id: 1,
@@ -383,10 +384,109 @@
                     { char: "ǎ", pinyin: "ǎ", meaning: "Nada 3 (Turun kemudian naik)", note: "Sebutan turun sedikit ke bawah lalu melengkung naik.\nContoh: mǎ (Kuda)" },
                     { char: "à", pinyin: "à", meaning: "Nada 4 (Menurun tajam)", note: "Sebutan menyentak turun dengan tegas.\nContoh: mà (Marah)" }
                 ]
+            },
+            {
+                id: 2,
+                title: "Level 2: Ucapan & Sapaan Harian",
+                desc: "Frasa asas perbualan dan tegur sapa.",
+                items: [
+                    { char: "你好", pinyin: "nǐ hǎo", meaning: "Apa khabar", note: "Sapaan rasmi mesra kepada seseorang." },
+                    { char: "您好", pinyin: "nín hǎo", meaning: "Apa khabar (Hormat)", note: "Digunakan untuk orang lebih tua atau VIP." },
+                    { char: "早上好", pinyin: "zǎoshang hǎo", meaning: "Selamat pagi", note: "Ucapan awal pagi." },
+                    { char: "再见", pinyin: "zàijiàn", meaning: "Selamat tinggal", note: "Jumpa lagi." }
+                ]
+            },
+            {
+                id: 3,
+                title: "Level 3: Ungkapan Terima Kasih & Maaf",
+                desc: "Adab dan kesopanan asas dalam bahasa Mandarin.",
+                items: [
+                    { char: "谢谢", pinyin: "xièxie", meaning: "Terima kasih", note: "Penghargaan asas." },
+                    { char: "不客气", pinyin: "bú kèqi", meaning: "Sama-sama", note: "Balasan terima kasih." },
+                    { char: "对不起", pinyin: "duìbuqǐ", meaning: "Minta maaf", note: "Mengaku kesilapan." },
+                    { char: "没关系", pinyin: "méi guānxi", meaning: "Tidak apa / Tak mengapa", note: "Balasan maaf." }
+                ]
+            },
+            {
+                id: 4,
+                title: "Level 4: Nombor 1 hingga 10",
+                desc: "Penguasaan angka asas dalam bahasa Mandarin.",
+                items: [
+                    { char: "一", pinyin: "yī", meaning: "Satu (1)", note: "Nombor 1" },
+                    { char: "二", pinyin: "èr", meaning: "Dua (2)", note: "Nombor 2" },
+                    { char: "三", pinyin: "sān", meaning: "Tiga (3)", note: "Nombor 3" },
+                    { char: "四", pinyin: "sì", meaning: "Empat (4)", note: "Nombor 4" }
+                ]
+            },
+            {
+                id: 5,
+                title: "Level 5: Ahli Keluarga Terdekat",
+                desc: "Kosa kata panggilan keluarga.",
+                items: [
+                    { char: "爸爸", pinyin: "bàba", meaning: "Ayah", note: "Bapa" },
+                    { char: "妈妈", pinyin: "māma", meaning: "Ibu", note: "Mak" },
+                    { char: "哥哥", pinyin: "gēge", meaning: "Abang", note: "Abang kandung" },
+                    { char: "姐姐", pinyin: "jiějie", meaning: "Kakak", note: "Kakak kandung" }
+                ]
+            },
+            {
+                id: 6,
+                title: "Level 6: Kata Ganti Nama Diri",
+                desc: "Penggunaan saya, awak, dia dan jamak.",
+                items: [
+                    { char: "我", pinyin: "wǒ", meaning: "Saya", note: "Subjek diri pertama" },
+                    { char: "你", pinyin: "nǐ", meaning: "Awak / Kamu", note: "Subjek diri kedua" },
+                    { char: "他", pinyin: "tā", meaning: "Dia (Lelaki)", note: "Subjek diri ketiga lelaki" },
+                    { char: "她", pinyin: "tā", meaning: "Dia (Perempuan)", note: "Subjek diri ketiga perempuan" }
+                ]
+            },
+            {
+                id: 7,
+                title: "Level 7: Makanan & Minuman Asas",
+                desc: "Kosa kata makanan harian.",
+                items: [
+                    { char: "水", pinyin: "shuǐ", meaning: "Air kosong", note: "Keperluan asas" },
+                    { char: "茶", pinyin: "chá", meaning: "Teh", note: "Minuman teh" },
+                    { char: "苹果", pinyin: "píngguǒ", meaning: "Epal", note: "Buah-buahan" },
+                    { char: "米饭", pinyin: "mǐfàn", meaning: "Nasi", note: "Makanan ruji" }
+                ]
+            },
+            {
+                id: 8,
+                title: "Level 8: Hari & Waktu",
+                desc: "Keterangan masa ringkas.",
+                items: [
+                    { char: "今天", pinyin: "jīntiān", meaning: "Hari ini", note: "Masa kini" },
+                    { char: "明天", pinyin: "míngtiān", meaning: "Esok", note: "Hari esok" },
+                    { char: "昨天", pinyin: "zuótiān", meaning: "Semalam", note: "Hari lepas" },
+                    { char: "现在", pinyin: "xiànzài", meaning: "Sekarang", note: "Waktu sekarang" }
+                ]
+            },
+            {
+                id: 9,
+                title: "Level 9: Warna Asas",
+                desc: "Pengecaman warna dalam Mandarin.",
+                items: [
+                    { char: "红色", pinyin: "hóngsè", meaning: "Warna Merah", note: "Merah" },
+                    { char: "蓝色", pinyin: "lánsè", meaning: "Warna Biru", note: "Biru" },
+                    { char: "白色", pinyin: "báisè", meaning: "Warna Putih", note: "Putih" },
+                    { char: "黑色", pinyin: "hēisè", meaning: "Warna Hitam", note: "Hitam" }
+                ]
+            },
+            {
+                id: 10,
+                title: "Level 10: Ujian Kemuncak Mandarin Asas",
+                desc: "Ujian komprehensif penguasaan tahap permulaan.",
+                items: [
+                    { char: "中文", pinyin: "zhōngwén", meaning: "Bahasa Cina", note: "Bahasa Mandarin" },
+                    { char: "学习", pinyin: "xuéxí", meaning: "Belajar", note: "Proses ilmu" },
+                    { char: "朋友", pinyin: "péngyou", meaning: "Kawan / Sahabat", note: "Hubungan sosial" },
+                    { char: "再见", pinyin: "zàijiàn", meaning: "Jumpa lagi", note: "Penutup modul" }
+                ]
             }
         ];
 
-        // Kategori Tematik termasuk Menu Makanan & Minuman Cina Baharu
+        // Kategori Tematik termasuk Menu Makanan & Minuman Cina
         const specialCategoriesData = [
             {
                 id: 'sc-numbers',
