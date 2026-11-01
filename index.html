@@ -68,7 +68,7 @@
                 <div class="relative z-10 max-w-2xl mx-auto space-y-4">
                     <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30 uppercase tracking-wider">Kurikulum Pinyin, Hanzi & Makanan Cina</span>
                     <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Kuasai Bahasa Mandarin Sepenuhnya</h2>
-                    <p class="text-slate-300 text-sm md:text-base">Teroka Modul Kenal Huruf Pinyin Penuh, Level 1 hingga 10, 22 Kategori Tematik Penuh (10+ contoh setiap satu), Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
+                    <p class="text-slate-300 text-sm md:text-base">Teroka Modul Kenal Huruf Pinyin Penuh (dengan panduan sebutan fonetik & aturan menulis), Level 1 hingga 10, 22 Kategori Tematik, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
                 </div>
             </div>
 
@@ -81,7 +81,7 @@
                         <i class="fa-solid fa-font"></i>
                     </div>
                     <h3 class="font-bold text-lg text-white">Kenal Huruf & Pinyin Penuh</h3>
-                    <p class="text-slate-400 text-sm">Senarai lengkap Konsonan (23 Shengmu), Vokal (24 Yunmu) dan 4 Nada.</p>
+                    <p class="text-slate-400 text-sm">Panduan sebutan fonetik sebenar (bukan sekadar abjad Rumi) & aturan menulis.</p>
                 </div>
 
                 <!-- 1. Study & Practice (Level 1-10) -->
@@ -147,7 +147,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-2xl font-bold text-white">Modul Kenal Huruf & Pinyin Penuh</h2>
-                    <p class="text-slate-400 text-sm">Senarai lengkap Kesemua Konsonan (Shengmu) & Vokal (Yunmu)</p>
+                    <p class="text-slate-400 text-sm">Panduan sebutan fonetik sebenar & teknik asas menulis aksara Cina (Hanzi)</p>
                 </div>
                 <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -160,6 +160,7 @@
                 <button onclick="switchAlphabetTab('tones')" id="tab-btn-tones" class="px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow whitespace-nowrap">4 Nada Suara</button>
                 <button onclick="switchAlphabetTab('initials')" id="tab-btn-initials" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Konsonan / Shengmu (23 Huruf)</button>
                 <button onclick="switchAlphabetTab('finals')" id="tab-btn-finals" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Vokal / Yunmu (24+ Huruf)</button>
+                <button onclick="switchAlphabetTab('writing')" id="tab-btn-writing" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Panduan Menulis (Hanzi)</button>
             </div>
 
             <!-- Tab Content Area -->
@@ -409,52 +410,58 @@
 
         const alphabetData = {
             tones: [
-                { char: "ā", pinyin: "mā", meaning: "Nada 1 (Datar/Tinggi)", desc: "Suara tinggi dan mendatar. Contoh: 妈 (mā - Ibu)" },
-                { char: "á", pinyin: "má", meaning: "Nada 2 (Menaik)", desc: "Suara naik ke atas seperti bertanya. Contoh: 麻 (má - Rami)" },
-                { char: "ǎ", pinyin: "mǎ", meaning: "Nada 3 (Turun kemudian naik)", desc: "Suara turun ke bawah lalu melengkung naik. Contoh: 马 (mǎ - Kuda)" },
-                { char: "à", pinyin: "mà", meaning: "Nada 4 (Menurun tegas)", desc: "Suara menyentak turun dengan tegas. Contoh: 骂 (mà - Marah)" }
+                { char: "ā", pinyin: "mā (Nada 1)", meaning: "Nada Datar / Tinggi", desc: "Suara lurus mendatar tanpa turun naik (contoh: māl - ibu)." },
+                { char: "á", pinyin: "má (Nada 2)", meaning: "Nada Menaik", desc: "Suara naik ke atas seperti sedang bertanya 'ha?' (contoh: má - rami)." },
+                { char: "ǎ", pinyin: "mǎ (Nada 3)", meaning: "Nada Turun-Naik", desc: "Suara turun ke bawah lalu melengkung naik (contoh: mǎ - kuda)." },
+                { char: "à", pinyin: "mà (Nada 4)", meaning: "Nada Menurun Tegas", desc: "Suara menyentak turun dengan tegas dan cepat (contoh: mà - marah)." }
             ],
             initials: [
-                { char: "b", pinyin: "b", meaning: "Konsonan 'B' ringan", desc: "Contoh: 爸爸 (bàba - Ayah)" },
-                { char: "p", pinyin: "p", meaning: "Konsonan 'P' berhembus", desc: "Contoh: 苹果 (píngguǒ - Epal)" },
-                { char: "m", pinyin: "m", meaning: "Konsonan 'M'", desc: "Contoh: 妈妈 (māma - Ibu)" },
-                { char: "f", pinyin: "f", meaning: "Konsonan 'F'", desc: "Contoh: 飞机 (fēijī - Kapal terbang)" },
-                { char: "d", pinyin: "d", meaning: "Konsonan 'D' ringan", desc: "Contoh: 大 (dà - Besar)" },
-                { char: "t", pinyin: "t", meaning: "Konsonan 'T' berhembus", desc: "Contoh: 太太 (tàitai - Puan)" },
-                { char: "n", pinyin: "n", meaning: "Konsonan 'N'", desc: "Contoh: 你 (nǐ - Awak)" },
-                { char: "l", pinyin: "l", meaning: "Konsonan 'L'", desc: "Contoh: 老师 (lǎoshī - Cikgu)" },
-                { char: "g", pinyin: "g", meaning: "Konsonan 'G' kerongkong", desc: "Contoh: 哥哥 (gēge - Abang)" },
-                { char: "k", pinyin: "k", meaning: "Konsonan 'K' berhembus", desc: "Contoh: 咖啡 (kāfēi - Kopi)" },
-                { char: "h", pinyin: "h", meaning: "Konsonan 'H' (seperti 'h' Melayu)", desc: "Contoh: 喝 (hē - Minum)" },
-                { char: "j", pinyin: "j", meaning: "Konsonan 'J' tajam (lidah rata)", desc: "Contoh: 家 (jiā - Rumah)" },
-                { char: "q", pinyin: "q", meaning: "Konsonan 'Q' (bunyi 'ch' angin)", desc: "Contoh: 铅笔 (qiānbǐ - Pensel)" },
-                { char: "x", pinyin: "x", meaning: "Konsonan 'X' (bunyi 'sh' senyum)", desc: "Contoh: 谢谢 (xièxie - Terima kasih)" },
-                { char: "zh", pinyin: "zh", meaning: "Konsonan 'Zh' (lidah melingkar)", desc: "Contoh: 知道 (zhīdào - Tahu)" },
-                { char: "ch", pinyin: "ch", meaning: "Konsonan 'Ch' (melingkar hembus)", desc: "Contoh: 吃 (chī - Makan)" },
-                { char: "sh", pinyin: "sh", meaning: "Konsonan 'Sh' (melingkar)", desc: "Contoh: 书 (shū - Buku)" },
-                { char: "r", pinyin: "r", meaning: "Konsonan 'R' (campuran r dan j)", desc: "Contoh: 人 (rén - Orang)" },
-                { char: "z", pinyin: "z", meaning: "Konsonan 'Z' (bunyi 'dz')", desc: "Contoh: 字 (zì - Perkataan)" },
-                { char: "c", pinyin: "c", meaning: "Konsonan 'C' (bunyi 'ts' tajam)", desc: "Contoh: 菜 (cài - Makanan/Sayur)" },
-                { char: "s", pinyin: "s", meaning: "Konsonan 'S' biasa", desc: "Contoh: 三 (sān - Tiga)" },
-                { char: "y", pinyin: "y", meaning: "Separuh vokal 'Y'", desc: "Contoh: 医生 (yīshēng - Doktor)" },
-                { char: "w", pinyin: "w", meaning: "Separuh vokal 'W'", desc: "Contoh: 五 (wǔ - Lima)" }
+                { char: "b", pinyin: "b (Bunyi 'b' ringan)", meaning: "Contoh: 爸爸 (bàba - Ayah)", desc: "Sebutan 'b' lembut tanpa hembusan nafas yang kuat." },
+                { char: "p", pinyin: "p (Bunyi 'p' berhembus)", meaning: "Contoh: 苹果 (píngguǒ - Epal)", desc: "Sebutan 'p' disertai hembusan angin dari mulut." },
+                { char: "m", pinyin: "m (Bunyi 'm')", meaning: "Contoh: 妈妈 (māma - Ibu)", desc: "Bunyi bibir katup seperti huruf m Melayu." },
+                { char: "f", pinyin: "f (Bunyi 'f')", meaning: "Contoh: 飞机 (fēijī - Kapal terbang)", desc: "Gigi atas kena bibir bawah." },
+                { char: "d", pinyin: "d (Bunyi 'd' ringan)", meaning: "Contoh: 大 (dà - Besar)", desc: "Hujung lidah kena gusi atas hadapan." },
+                { char: "t", pinyin: "t (Bunyi 't' berhembus)", meaning: "Contoh: 太太 (tàitai - Puan)", desc: "Bunyi 't' dengan hembusan angin kuat." },
+                { char: "n", pinyin: "n (Bunyi 'n')", meaning: "Contoh: 你 (nǐ - Awak)", desc: "Hujung lidah sentuh lelangit atas." },
+                { char: "l", pinyin: "l (Bunyi 'l')", meaning: "Contoh: 老师 (lǎoshī - Cikgu)", desc: "Hujung lidah melengkung ke atas." },
+                { char: "g", pinyin: "g (Bunyi 'g' kerongkong)", meaning: "Contoh: 哥哥 (gēge - Abang)", desc: "Bunyi dari pangkal kerongkong." },
+                { char: "k", pinyin: "k (Bunyi 'k' berhembus)", meaning: "Contoh: 咖啡 (kāfēi - Kopi)", desc: "Bunyi kerongkong dengan hembusan angin." },
+                { char: "h", pinyin: "h (Bunyi 'h')", meaning: "Contoh: 喝 (hē - Minum)", desc: "Hembusan nafas lembut dari kerongkong." },
+                { char: "j", pinyin: "j (Bunyi 'j' tajam)", meaning: "Contoh: 家 (jiā - Rumah)", desc: "Lidah rata ke lelangit depan (bunyi dekat dengan 'ji' lembut)." },
+                { char: "q", pinyin: "q (Bunyi 'ch' berangin)", meaning: "Contoh: 铅笔 (qiānbǐ - Pensel)", desc: "Bunyi 'ch' tajam disertai hembusan angin." },
+                { char: "x", pinyin: "x (Bunyi 'sh' senyum)", meaning: "Contoh: 谢谢 (xièxie - Terima kasih)", desc: "Bunyi 'sh' dengan gigi merapat dan bibir senyum." },
+                { char: "zh", pinyin: "zh (Bunyi 'dj' lidah melingkar)", meaning: "Contoh: 知道 (zhīdào - Tahu)", desc: "Lidah melingkar ke belakang (bunyi antara 'd' dan 'zh')." },
+                { char: "ch", pinyin: "ch (Bunyi 'ch' melingkar)", meaning: "Contoh: 吃 (chī - Makan)", desc: "Lidah melingkar ke belakang dengan hembusan angin." },
+                { char: "sh", pinyin: "sh (Bunyi 'sh' melingkar)", meaning: "Contoh: 书 (shū - Buku)", desc: "Lidah melingkar ke belakang menyebut 'sh'." },
+                { char: "r", pinyin: "r (Bunyi 'r' / 'zh' lembut)", meaning: "Contoh: 人 (rén - Orang)", desc: "Bunyi antara 'r' Melayu dan 'j' Perancis." },
+                { char: "z", pinyin: "z (Bunyi 'dz')", meaning: "Contoh: 字 (zì - Perkataan)", desc: "Gabungan bunyi 'd' dan 'z' (ts/dz)." },
+                { char: "c", pinyin: "c (Bunyi 'ts' tajam)", meaning: "Contoh: 菜 (cài - Sayur/Makanan)", desc: "Bunyi 'ts' yang kuat di hujung gigi (bukan bunyi c Melayu)." },
+                { char: "s", pinyin: "s (Bunyi 's')", meaning: "Contoh: 三 (sān - Tiga)", desc: "Bunyi 's' biasa." },
+                { char: "y", pinyin: "y (Separuh vokal 'y')", meaning: "Contoh: 医生 (yīshēng - Doktor)", desc: "Bunyi 'i' panjang." },
+                { char: "w", pinyin: "w (Separuh vokal 'w')", meaning: "Contoh: 五 (wǔ - Lima)", desc: "Bunyi 'u' bulat." }
             ],
             finals: [
-                { char: "a", pinyin: "a", meaning: "Vokal 'A'", desc: "Contoh: 妈 (mā)" },
-                { char: "o", pinyin: "o", meaning: "Vokal 'O'", desc: "Contoh: 啵 (bo)" },
-                { char: "e", pinyin: "e", meaning: "Vokal 'E'", desc: "Contoh: 饿 (è)" },
-                { char: "i", pinyin: "i", meaning: "Vokal 'I'", desc: "Contoh: 你 (nǐ)" },
-                { char: "u", pinyin: "u", meaning: "Vokal 'U'", desc: "Contoh: 入 (rù)" },
-                { char: "ü", pinyin: "ü", meaning: "Vokal 'Ü' (u senyum)", desc: "Contoh: 女 (nǚ)" },
-                { char: "ai", pinyin: "ai", meaning: "Gabungan 'Ai'", desc: "Contoh: 爱 (ài - Cinta)" },
-                { char: "ei", pinyin: "ei", meaning: "Gabungan 'Ei'", desc: "Contoh: 爷爷 (yéye - Datuk)" },
-                { char: "ao", pinyin: "ao", meaning: "Gabungan 'Ao'", desc: "Contoh: 熬 (áo)" },
-                { char: "ou", pinyin: "ou", meaning: "Gabungan 'Ou'", desc: "Contoh: 鸥 (ōu)" },
-                { char: "an", pinyin: "an", meaning: "Vokal sengau '-an'", desc: "Contoh: 安 (ān)" },
-                { char: "en", pinyin: "en", meaning: "Vokal sengau '-en'", desc: "Contoh: 恩 (ēn)" },
-                { char: "ang", pinyin: "ang", meaning: "Vokal sengau belakang '-ang'", desc: "Contoh: 昂 (áng)" },
-                { char: "eng", pinyin: "eng", meaning: "Vokal sengau belakang '-eng'", desc: "Contoh: 邓 (dèng)" },
-                { char: "ong", pinyin: "ong", meaning: "Vokal sengau belakang '-ong'", desc: "Contoh: 中 (zhōng)" }
+                { char: "a", pinyin: "a (Vokal A)", meaning: "Contoh: 妈 (mā)", desc: "Bunyi 'a' terbuka luas seperti 'ayam'." },
+                { char: "o", pinyin: "o (Vokal O)", meaning: "Contoh: 啵 (bo)", desc: "Bunyi 'o' bulat." },
+                { char: "e", pinyin: "e (Vokal E)", meaning: "Contoh: 饿 (è)", desc: "Bunyi 'e' seperti perkataan 'emas'." },
+                { char: "i", pinyin: "i (Vokal I)", meaning: "Contoh: 你 (nǐ)", desc: "Bunyi 'i' tajam." },
+                { char: "u", pinyin: "u (Vokal U)", meaning: "Contoh: 入 (rù)", desc: "Bunyi 'u' rapat." },
+                { char: "ü", pinyin: "ü (U senyum)", meaning: "Contoh: 女 (nǚ)", desc: "Sebar bunyi 'u' tetapi bibir bentuk seakan nak senyum." },
+                { char: "ai", pinyin: "ai (Gabungan Ai)", meaning: "Contoh: 爱 (ài - Cinta)", desc: "Bunyi 'ai' seperti 'ais'." },
+                { char: "ei", pinyin: "ei (Gabungan Ei)", meaning: "Contoh: 爷爷 (yéye - Datuk)", desc: "Bunyi 'ei' seperti 'ekor'." },
+                { char: "ao", pinyin: "ao (Gabungan Ao)", meaning: "Contoh: 熬 (áo)", desc: "Bunyi 'ao' seperti 'kau'." },
+                { char: "ou", pinyin: "ou (Gabungan Ou)", meaning: "Contoh: 鸥 (ōu)", desc: "Bunyi 'ou' seperti 'oh'." },
+                { char: "an", pinyin: "an (Sengau -an)", meaning: "Contoh: 安 (ān)", desc: "Hujung dengan bunyi sengau 'n'." },
+                { char: "en", pinyin: "en (Sengau -en)", meaning: "Contoh: 恩 (ēn)", desc: "Bunyi sengau 'en'." },
+                { char: "ang", pinyin: "ang (Sengau -ang)", meaning: "Contoh: 昂 (áng)", desc: "Bunyi sengau belakang kerongkong '-ang'." },
+                { char: "eng", pinyin: "eng (Sengau -eng)", meaning: "Contoh: 邓 (dèng)", desc: "Bunyi sengau belakang '-eng'." },
+                { char: "ong", pinyin: "ong (Sengau -ong)", meaning: "Contoh: 中 (zhōng)", desc: "Bunyi sengau belakang '-ong'." }
+            ],
+            writing: [
+                { char: "Aturan 1", pinyin: "Dari Atas Ke Bawah (从上到下)", meaning: "Goresan Melintang (Horizontal)", desc: "Sentiasa tulis garisan atas dahulu sebelum garisan bawah (Contoh: 三)." },
+                { char: "Aturan 2", pinyin: "Dari Kiri Ke Kanan (从左到右)", meaning: "Goresan Menegak & Melintang", desc: "Utamakan goresan sebelah kiri sebelum sebelah kanan (Contoh: 明)." },
+                { char: "Aturan 3", pinyin: "Tulis Luar Dulu, Baru Tutup Dalam (先外后内)", meaning: "Kotak / Bingkai (框)", desc: "Siapkan dinding luar bingkai, tulis huruf di dalam, barulah tutup garisan bawah bingkai (Contoh: 国)." },
+                { char: "Aturan 4", pinyin: "Tengah Dulu, Kiri Kanan Kemudian (先中间后两边)", meaning: "Goresan Simetri", desc: "Tulis bahagian tiang tengah utama dahulu sebelum menyiap bahagian sayap kiri dan kanan (Contoh: 小)." }
             ]
         };
 
@@ -464,7 +471,7 @@
                 title: "Level 1: 4 Nada & Pinyin Asas",
                 desc: "Pengenalan nada suara (1 hingga 4) dan vokal asas.",
                 items: [
-                    { char: "ā", pinyin: "ā", meaning: "Nada 1 (Datar/Tinggi)", note: "Sebutan tinggi mendatar tanpa turun naik.\nContoh: māl (Ibu)" },
+                    { char: "ā", pinyin: "ā", meaning: "Nada 1 (Datar/Tinggi)", note: "Sebutan tinggi mendatar tanpa turun naik.\nContoh: mā (Ibu)" },
                     { char: "á", pinyin: "á", meaning: "Nada 2 (Menaik)", note: "Sebutan bermula dari aras sederhana naik ke atas.\nContoh: má (Rami)" },
                     { char: "ǎ", pinyin: "ǎ", meaning: "Nada 3 (Turun kemudian naik)", note: "Sebutan turun sedikit ke bawah lalu melengkung naik.\nContoh: mǎ (Kuda)" },
                     { char: "à", pinyin: "à", meaning: "Nada 4 (Menurun tajam)", note: "Sebutan menyentak turun dengan tegas.\nContoh: mà (Marah)" }
@@ -571,7 +578,7 @@
             }
         ];
 
-        // 22 Kategori Khas Tematik (DIPADATKAN DENGAN 10+ CONTOH KOSA KATA SETIAP SATU)
+        // 22 Kategori Khas Tematik (LENGKAP 10+ CONTOH)
         const specialCategoriesData = [
             {
                 id: 'sc-numbers',
@@ -1003,7 +1010,7 @@
         }
 
         function switchAlphabetTab(tabName) {
-            ['tones', 'initials', 'finals'].forEach(t => {
+            ['tones', 'initials', 'finals', 'writing'].forEach(t => {
                 const btn = document.getElementById(`tab-btn-${t}`);
                 if (btn) {
                     if (t === tabName) {
