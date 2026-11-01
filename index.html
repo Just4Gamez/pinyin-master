@@ -68,7 +68,7 @@
                 <div class="relative z-10 max-w-2xl mx-auto space-y-4">
                     <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30 uppercase tracking-wider">Kurikulum Pinyin, Hanzi & Makanan Cina</span>
                     <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Kuasai Bahasa Mandarin Sepenuhnya</h2>
-                    <p class="text-slate-300 text-sm md:text-base">Teroka Modul Kenal Huruf Pinyin Penuh (dengan panduan sebutan fonetik & aturan menulis), Level 1 hingga 10, 22 Kategori Tematik, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
+                    <p class="text-slate-300 text-sm md:text-base">Teroka Modul Pinyin Penuh, Panduan Menulis Huruf (Hanzi), Level 1 hingga 10, 22 Kategori Tematik, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
                 </div>
             </div>
 
@@ -81,7 +81,17 @@
                         <i class="fa-solid fa-font"></i>
                     </div>
                     <h3 class="font-bold text-lg text-white">Kenal Huruf & Pinyin Penuh</h3>
-                    <p class="text-slate-400 text-sm">Panduan sebutan fonetik sebenar (bukan sekadar abjad Rumi) & aturan menulis.</p>
+                    <p class="text-slate-400 text-sm">Panduan sebutan fonetik sebenar (Konsonan, Vokal & 4 Nada Suara).</p>
+                </div>
+
+                <!-- 0.1 Modul Panduan Menulis Huruf (Kategori Baru) -->
+                <div onclick="showSection('writing-guide')" class="bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl relative overflow-hidden">
+                    <div class="absolute top-3 right-3 px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-[10px] font-bold rounded border border-indigo-500/30">ASAS TULISAN</div>
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Panduan Menulis Huruf (Hanzi)</h3>
+                    <p class="text-slate-400 text-sm">Teknik goresan asas, aturan menulis dan latihan aksara Cina langkah demi langkah.</p>
                 </div>
 
                 <!-- 1. Study & Practice (Level 1-10) -->
@@ -147,7 +157,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="text-2xl font-bold text-white">Modul Kenal Huruf & Pinyin Penuh</h2>
-                    <p class="text-slate-400 text-sm">Panduan sebutan fonetik sebenar & teknik asas menulis aksara Cina (Hanzi)</p>
+                    <p class="text-slate-400 text-sm">Panduan sebutan fonetik sebenar (Konsonan, Vokal & 4 Nada Suara)</p>
                 </div>
                 <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -160,11 +170,26 @@
                 <button onclick="switchAlphabetTab('tones')" id="tab-btn-tones" class="px-4 py-2 rounded-xl bg-teal-600 text-white font-bold text-sm shadow whitespace-nowrap">4 Nada Suara</button>
                 <button onclick="switchAlphabetTab('initials')" id="tab-btn-initials" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Konsonan / Shengmu (23 Huruf)</button>
                 <button onclick="switchAlphabetTab('finals')" id="tab-btn-finals" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Vokal / Yunmu (24+ Huruf)</button>
-                <button onclick="switchAlphabetTab('writing')" id="tab-btn-writing" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold text-sm hover:bg-slate-700 whitespace-nowrap">Panduan Menulis (Hanzi)</button>
             </div>
 
             <!-- Tab Content Area -->
             <div id="alphabet-content-area" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </section>
+
+        <!-- ================= PANDUAN MENULIS HURUF (SECTION BARU) ================= -->
+        <section id="section-writing-guide" class="hidden space-y-6 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Panduan Menulis Huruf (Hanzi)</h2>
+                    <p class="text-slate-400 text-sm">Teknik asas goresan, aturan penulisan dan latihan aksara Cina</p>
+                </div>
+                <button onclick="showSection('home')" class="text-slate-400 hover:text-white text-sm flex items-center space-x-1">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Kembali</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="writing-guide-container"></div>
         </section>
 
         <!-- ================= LEVEL SELECT SECTION ================= -->
@@ -456,14 +481,48 @@
                 { char: "ang", pinyin: "ang (Sengau -ang)", meaning: "Contoh: 昂 (áng)", desc: "Bunyi sengau belakang kerongkong '-ang'." },
                 { char: "eng", pinyin: "eng (Sengau -eng)", meaning: "Contoh: 邓 (dèng)", desc: "Bunyi sengau belakang '-eng'." },
                 { char: "ong", pinyin: "ong (Sengau -ong)", meaning: "Contoh: 中 (zhōng)", desc: "Bunyi sengau belakang '-ong'." }
-            ],
-            writing: [
-                { char: "Aturan 1", pinyin: "Dari Atas Ke Bawah (从上到下)", meaning: "Goresan Melintang (Horizontal)", desc: "Sentiasa tulis garisan atas dahulu sebelum garisan bawah (Contoh: 三)." },
-                { char: "Aturan 2", pinyin: "Dari Kiri Ke Kanan (从左到右)", meaning: "Goresan Menegak & Melintang", desc: "Utamakan goresan sebelah kiri sebelum sebelah kanan (Contoh: 明)." },
-                { char: "Aturan 3", pinyin: "Tulis Luar Dulu, Baru Tutup Dalam (先外后内)", meaning: "Kotak / Bingkai (框)", desc: "Siapkan dinding luar bingkai, tulis huruf di dalam, barulah tutup garisan bawah bingkai (Contoh: 国)." },
-                { char: "Aturan 4", pinyin: "Tengah Dulu, Kiri Kanan Kemudian (先中间后两边)", meaning: "Goresan Simetri", desc: "Tulis bahagian tiang tengah utama dahulu sebelum menyiap bahagian sayap kiri dan kanan (Contoh: 小)." }
             ]
         };
+
+        // Kategori Baru: Panduan Menulis Hanzi & Goresan Asas
+        const writingGuideData = [
+            {
+                char: "一",
+                title: "1. Aturan Goresan: Dari Kiri ke Kanan (从左到右)",
+                stroke: "Goresan Melintang (Heng - 横)",
+                desc: "Mulakan gurisan pen dari sebelah kiri mendatar ke kanan. Contoh huruf: 一 (Satu), 二 (Dua), 三 (Tiga)."
+            },
+            {
+                char: "丨",
+                title: "2. Aturan Goresan: Dari Atas ke Bawah (从上到下)",
+                stroke: "Goresan Menegak (Shu - 竖)",
+                desc: "Tulis garisan tegak lurus dari atas turun ke bawah terlebih dahulu sebelum garisan melintang lain. Contoh huruf: 十 (Sepuluh), 中 (Tengah)."
+            },
+            {
+                char: "丶",
+                title: "3. Aturan Goresan: Titik / Dot (点 - Diǎn)",
+                stroke: "Gurisan Titik",
+                desc: "Titik ditulis dari arah atas menyerong ke kanan bawah dengan sentuhan pen yang kemas. Contoh huruf: 六 (Enam), 文 (Bahasa)."
+            },
+            {
+                char: "丿",
+                title: "4. Aturan Goresan: Melengkung Kiri (撇 - Piě)",
+                stroke: "Gurisan Menyerong Kiri",
+                desc: "Tarik pen dari atas menyerong turun ke arah kiri secara lembut. Contoh huruf: 人 (Orang), 八 (Lapan)."
+            },
+            {
+                char: "㇏",
+                title: "5. Aturan Goresan: Melengkung Kanan (捺 - Nà)",
+                stroke: "Gurisan Menyerong Kanan",
+                desc: "Tarik pen dari atas menyerong turun ke arah kanan dan tekan sedikit hujungnya. Contoh huruf: 大 (Besar), 天 (Langit)."
+            },
+            {
+                char: "囗",
+                title: "6. Aturan Goresan: Luar Dulu, Baru Tutup Dalam (先外后内)",
+                stroke: "Aturan Bingkai & Kotak",
+                desc: "Siapkan dinding bingkai luar kiri dan atas, tulis elemen di dalam, dan tutup garisan bawah bingkai pada akhir sekali. Contoh huruf: 国 (Negara), 四 (Empat)."
+            }
+        ];
 
         const levelsData = [
             {
@@ -995,13 +1054,14 @@
             renderSpecialCategoryCards();
             renderConversationCards();
             renderGrammarLabCards();
+            renderWritingGuideCards();
             switchAlphabetTab('tones');
             buildAllWordsList();
             showSection('home');
         });
 
         function showSection(sectionId) {
-            ['home', 'alphabet', 'levels', 'special', 'conversation', 'grammar-lab', 'study', 'quiz', 'words', 'listen', 'result'].forEach(id => {
+            ['home', 'alphabet', 'writing-guide', 'levels', 'special', 'conversation', 'grammar-lab', 'study', 'quiz', 'words', 'listen', 'result'].forEach(id => {
                 const el = document.getElementById(`section-${id}`);
                 if (el) el.classList.add('hidden');
             });
@@ -1010,7 +1070,7 @@
         }
 
         function switchAlphabetTab(tabName) {
-            ['tones', 'initials', 'finals', 'writing'].forEach(t => {
+            ['tones', 'initials', 'finals'].forEach(t => {
                 const btn = document.getElementById(`tab-btn-${t}`);
                 if (btn) {
                     if (t === tabName) {
@@ -1038,6 +1098,28 @@
                     <button onclick="speakText('${item.char}')" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-xl text-teal-400 flex items-center justify-center shadow">
                         <i class="fa-solid fa-volume-high"></i>
                     </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderWritingGuideCards() {
+            const container = document.getElementById('writing-guide-container');
+            if (!container) return;
+            container.innerHTML = '';
+            writingGuideData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-center space-x-6 shadow-xl";
+                card.innerHTML = `
+                    <div class="w-24 h-24 bg-slate-950 border-2 border-slate-700 rounded-2xl stroke-box flex items-center justify-center shrink-0 shadow-inner">
+                        <span class="hanzi-font text-5xl font-black text-amber-400">${item.char}</span>
+                    </div>
+                    <div class="space-y-1.5 flex-grow">
+                        <span class="px-2.5 py-0.5 bg-indigo-500/10 text-indigo-400 text-[10px] font-bold rounded border border-indigo-500/20">ATURAN GORESAN</span>
+                        <h3 class="font-bold text-lg text-white">${item.title}</h3>
+                        <div class="text-xs font-bold text-red-400">Jenis: ${item.stroke}</div>
+                        <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+                    </div>
                 `;
                 container.appendChild(card);
             });
