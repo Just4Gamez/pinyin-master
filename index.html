@@ -68,7 +68,7 @@
                 <div class="relative z-10 max-w-2xl mx-auto space-y-4">
                     <span class="px-3 py-1 bg-red-500/20 text-red-400 text-xs font-semibold rounded-full border border-red-500/30 uppercase tracking-wider">Kurikulum Pinyin, Hanzi & Makanan Cina</span>
                     <h2 class="text-3xl md:text-5xl font-black tracking-tight text-white">Kuasai Bahasa Mandarin Sepenuhnya</h2>
-                    <p class="text-slate-300 text-sm md:text-base">Teroka Modul Kenal Huruf Pinyin Penuh, Level 1 hingga 10, Kategori Tematik & Menu Makanan, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
+                    <p class="text-slate-300 text-sm md:text-base">Teroka Modul Kenal Huruf Pinyin Penuh, Level 1 hingga 10, 22 Kategori Tematik & Menu Makanan, Conversation Lab, Grammar Lab, Kamus Indeks atau Mod Dengar Audio!</p>
                 </div>
             </div>
 
@@ -94,12 +94,13 @@
                 </div>
 
                 <!-- 2. Special Categories -->
-                <div onclick="openSpecialMenu()" class="bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl">
+                <div onclick="openSpecialMenu()" class="bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-6 cursor-pointer transition transform hover:-translate-y-1 space-y-3 group shadow-xl relative overflow-hidden">
+                    <div class="absolute top-3 right-3 px-2 py-0.5 bg-amber-500/20 text-amber-400 text-[10px] font-bold rounded border border-amber-500/30">22 KATEGORI</div>
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition">
                         <i class="fa-solid fa-utensils"></i>
                     </div>
                     <h3 class="font-bold text-lg text-white">Kategori Tematik & Menu Makanan</h3>
-                    <p class="text-slate-400 text-sm">Nombor, Keluarga, serta Menu Makanan & Minuman Cina.</p>
+                    <p class="text-slate-400 text-sm">22 kategori pilihan: Makanan, Minuman, Tempat, Emosi, Pekerjaan & banyak lagi.</p>
                 </div>
 
                 <!-- 3. Conversation Lab -->
@@ -572,7 +573,7 @@
             }
         ];
 
-        // Kategori Tematik termasuk Menu Makanan & Minuman Cina
+        // 22 Kategori Khas Tematik & Menu Makanan (2 Asal + 20 Tambahan Baru)
         const specialCategoriesData = [
             {
                 id: 'sc-numbers',
@@ -601,6 +602,226 @@
                     { char: "果汁", pinyin: "guǒzhī", meaning: "Jus buah-buahan", note: "Minuman segar." },
                     { char: "水", pinyin: "shuǐ", meaning: "Air kosong", note: "Keperluan asas." },
                     { char: "咖啡", pinyin: "kāfēi", meaning: "Kopi", note: "Minuman berkafein." }
+                ]
+            },
+            {
+                id: 'sc-fruits',
+                title: "3. Buah-Buahan (水果)",
+                desc: "Kosa kata buah-buahan segar.",
+                items: [
+                    { char: "苹果", pinyin: "píngguǒ", meaning: "Epal", note: "Buah epal merah/hijau" },
+                    { char: "香蕉", pinyin: "xiāngjiāo", meaning: "Pisang", note: "Buah pisang manis" },
+                    { char: "西瓜", pinyin: "xīguā", meaning: "Tembikai", note: "Buah tembikai berair" },
+                    { char: "橙子", pinyin: "chéngzi", meaning: "Oren / Limau", note: "Buah limau oren" }
+                ]
+            },
+            {
+                id: 'sc-animals',
+                title: "4. Haiwan Peliharaan & Liar (动物)",
+                desc: "Nama-nama haiwan biasa.",
+                items: [
+                    { char: "猫", pinyin: "māo", meaning: "Kucing", note: "Haiwan peliharaan" },
+                    { char: "狗", pinyin: "gǒu", meaning: "Anjing", note: "Haiwan setia" },
+                    { char: "鸟", pinyin: "niǎo", meaning: "Burung", note: "Haiwan bersayap" },
+                    { char: "鱼", pinyin: "yú", meaning: "Ikan", note: "Haiwan akuatik" }
+                ]
+            },
+            {
+                id: 'sc-colors',
+                title: "5. Warna Terang (颜色)",
+                desc: "Pengecaman warna asas dan terang.",
+                items: [
+                    { char: "红色", pinyin: "hóngsè", meaning: "Merah", note: "Warna merah" },
+                    { char: "蓝色", pinyin: "lánsè", meaning: "Biru", note: "Warna biru" },
+                    { char: "黄色", pinyin: "huángsè", meaning: "Kuning", note: "Warna kuning" },
+                    { char: "绿色", pinyin: "lǜsè", meaning: "Hijau", note: "Warna hijau" }
+                ]
+            },
+            {
+                id: 'sc-transport',
+                title: "6. Pengangkutan & Kenderaan (交通)",
+                desc: "Mod pengangkutan harian.",
+                items: [
+                    { char: "汽车", pinyin: "qìchē", meaning: "Kereta", note: "Kenderaan jalan raya" },
+                    { char: "飞机", pinyin: "fēijī", meaning: "Kapal terbang", note: "Pengangkutan udara" },
+                    { char: "火车", pinyin: "huǒchē", meaning: "Kereta api", note: "Pengangkutan rel" },
+                    { char: "船", pinyin: "chuán", meaning: "Bot / Kapal", note: "Pengangkutan air" }
+                ]
+            },
+            {
+                id: 'sc-professions',
+                title: "7. Pekerjaan & Kerjaya (职业)",
+                desc: "Jenis-jenis pekerjaan utama.",
+                items: [
+                    { char: "老师", pinyin: "lǎoshī", meaning: "Cikgu / Guru", note: "Pendidik" },
+                    { char: "医生", pinyin: "yīshēng", meaning: "Doktor", note: "Perubatan" },
+                    { char: "学生", pinyin: "xuésheng", meaning: "Pelajar / Murid", note: "Pencari ilmu" },
+                    { char: "警察", pinyin: "jǐngchá", meaning: "Polis", note: "Keselamatan" }
+                ]
+            },
+            {
+                id: 'sc-body-parts',
+                title: "8. Anggota Badan (身体部位)",
+                desc: "Bahagian tubuh manusia.",
+                items: [
+                    { char: "头", pinyin: "tóu", meaning: "Kepala", note: "Bahagian atas badan" },
+                    { char: "眼睛", pinyin: "yǎnjīng", meaning: "Mata", note: "Organ penglihatan" },
+                    { char: "手", pinyin: "shǒu", meaning: "Tangan", note: "Anggota tangan" },
+                    { char: "脚", pinyin: "jiǎo", meaning: "Kaki", note: "Anggota kaki" }
+                ]
+            },
+            {
+                id: 'sc-weather',
+                title: "9. Cuaca & Alam (天气)",
+                desc: "Keadaan cuaca harian.",
+                items: [
+                    { char: "晴天", pinyin: "qíngtiān", meaning: "Cuaca cerah", note: "Hari panas/cerah" },
+                    { char: "雨", pinyin: "yǔ", meaning: "Hujan", note: "Air hujan turun" },
+                    { char: "风", pinyin: "fēng", meaning: "Angin", note: "Tiupan angin" },
+                    { char: "雪", pinyin: "xuě", meaning: "Salji", note: "Musim salji" }
+                ]
+            },
+            {
+                id: 'sc-emotions',
+                title: "10. Perasaan & Emosi (情感)",
+                desc: "Ekspresi emosi manusia.",
+                items: [
+                    { char: "高兴", pinyin: "gāoxìng", meaning: "Gembira / Suka", note: "Perasaan ceria" },
+                    { char: "伤心", pinyin: "shāngxīn", meaning: "Sedih", note: "Perasaan hiba" },
+                    { char: "累", pinyin: "lèi", meaning: "Letih / Penat", note: "Keadaan fizikal" },
+                    { char: "生气", pinyin: "shēngqì", meaning: "Marah", note: "Perasaan geram" }
+                ]
+            },
+            {
+                id: 'sc-sports',
+                title: "11. Sukan & Rekreasi (运动)",
+                desc: "Aktiviti sukan dan senaman.",
+                items: [
+                    { char: "跑步", pinyin: "pǎobù", meaning: "Berlari", note: "Senaman larian" },
+                    { char: "游泳", pinyin: "yóuyǒng", meaning: "Berenang", note: "Aktiviti air" },
+                    { char: "篮球", pinyin: "lánqiú", meaning: "Bola keranjang", note: "Permainan bola" },
+                    { char: "足球", pinyin: "zúqiú", meaning: "Bola sepak", note: "Sukan padang" }
+                ]
+            },
+            {
+                id: 'sc-clothing',
+                title: "12. Pakaian & Fesyen (衣服)",
+                desc: "Jenis pakaian harian.",
+                items: [
+                    { char: "衣服", pinyin: "yīfu", meaning: "Pakaian / Baju", note: "Kain baju" },
+                    { char: "裤子", pinyin: "kùzi", meaning: "Seluar", note: "Pakaian bawah" },
+                    { char: "鞋子", pinyin: "xiézi", meaning: "Kasut", note: "Alas kaki" },
+                    { char: "帽子", pinyin: "màozi", meaning: "Topi", note: "Penutup kepala" }
+                ]
+            },
+            {
+                id: 'sc-school',
+                title: "13. Barangan Sekolah (学校用品)",
+                desc: "Alatan belajar di sekolah.",
+                items: [
+                    { char: "书", pinyin: "shū", meaning: "Buku", note: "Buku rujukan" },
+                    { char: "笔", pinyin: "bǐ", meaning: "Pen / Pensel", note: "Alat tulis" },
+                    { char: "本子", pinyin: "běnzi", meaning: "Buku nota", note: "Buku latihan" },
+                    { char: "学校", pinyin: "xuéxiào", meaning: "Sekolah", note: "Institusi ilmu" }
+                ]
+            },
+            {
+                id: 'sc-house',
+                title: "14. Ruang & Perabot Rumah (家具)",
+                desc: "Kawasan dan barangan dalam rumah.",
+                items: [
+                    { char: "家", pinyin: "jiā", meaning: "Rumah / Keluarga", note: "Tempat tinggal" },
+                    { char: "桌子", pinyin: "zhuōzi", meaning: "Meja", note: "Perabot meja" },
+                    { char: "椅子", pinyin: "yǐzi", meaning: "Kerusi", note: "Tempat duduk" },
+                    { char: "床", pinyin: "chuáng", meaning: "Katil", note: "Tempat tidur" }
+                ]
+            },
+            {
+                id: 'sc-time',
+                title: "15. Masa & Kalendar (时间)",
+                desc: "Keterangan masa dan hari.",
+                items: [
+                    { char: "今天", pinyin: "jīntiān", meaning: "Hari ini", note: "Masa semasa" },
+                    { char: "明天", pinyin: "míngtiān", meaning: "Esok", note: "Hari esok" },
+                    { char: "昨天", pinyin: "zuótiān", meaning: "Semalam", note: "Hari lepas" },
+                    { char: "年", pinyin: "nián", meaning: "Tahun", note: "Ukuran tahun" }
+                ]
+            },
+            {
+                id: 'sc-hobbies',
+                title: "16. Hobi & Minat (爱好)",
+                desc: "Aktiviti masa lapang.",
+                items: [
+                    { char: "听音乐", pinyin: "tīng yīnyuè", meaning: "Dengar muzik", note: "Hobi santai" },
+                    { char: "看书", pinyin: "kàn shū", meaning: "Baca buku", note: "Amalan membaca" },
+                    { char: "画画", pinyin: "huàhuà", meaning: "Melukis", note: "Seni lukis" },
+                    { char: "旅游", pinyin: "lǚyóu", meaning: "Melancong", note: "Aktiviti jalan-jalan" }
+                ]
+            },
+            {
+                id: 'sc-tech',
+                title: "17. Teknologi & Gajet (科技)",
+                desc: "Alatan moden dan elektronik.",
+                items: [
+                    { char: "手机", pinyin: "shǒujī", meaning: "Telefon bimbit", note: "Gajet telefon" },
+                    { char: "电脑", pinyin: "diànnǎo", meaning: "Komputer / Laptop", note: "Peranti komputer" },
+                    { char: "电视", pinyin: "diànshì", meaning: "Televisyen", note: "Media visual" },
+                    { char: "相机", pinyin: "xiàngjī", meaning: "Kamera", note: "Alat merakam" }
+                ]
+            },
+            {
+                id: 'sc-shopping',
+                title: "18. Membeli-belah & Wang (购物)",
+                desc: "Urus niaga dan barangan beli.",
+                items: [
+                    { char: "钱", pinyin: "qián", meaning: "Wang / Duit", note: "Mata wang" },
+                    { char: "贵", pinyin: "guì", meaning: "Mahal", note: "Harga tinggi" },
+                    { char: "便宜", pinyin: "piányi", meaning: "Murah", note: "Harga rendah" },
+                    { char: "买", pinyin: "mǎi", meaning: "Beli", note: "Transaksi beli" }
+                ]
+            },
+            {
+                id: 'sc-travel',
+                title: "19. Tempat & Pelancongan (旅游地)",
+                desc: "Lokasi dan tempat menarik.",
+                items: [
+                    { char: "酒店", pinyin: "jiǔdiàn", meaning: "Hotel", note: "Tempat penginapan" },
+                    { char: "机场", pinyin: "jīchǎng", meaning: "Lapangan terbang", note: "Hub penerbangan" },
+                    { char: "医院", pinyin: "yīyuàn", meaning: "Hospital", note: "Pusat perubatan" },
+                    { char: "超市", pinyin: "chāoshì", meaning: "Pasar raya", note: "Tempat beli-belah" }
+                ]
+            },
+            {
+                id: 'sc-nature',
+                title: "20. Alam Semulajadi (自然)",
+                desc: "Keindahan alam sekitar.",
+                items: [
+                    { char: "山", pinyin: "shān", meaning: "Gunung / Bukit", note: "Bentuk muka bumi" },
+                    { char: "水", pinyin: "shuǐ", meaning: "Air / Sungai", note: "Sumber air" },
+                    { char: "花", pinyin: "huā", meaning: "Bunga", note: "Tumbuhan berbunga" },
+                    { char: "树", pinyin: "shù", meaning: "Pokok", note: "Tumbuhan kayu" }
+                ]
+            },
+            {
+                id: 'sc-shapes',
+                title: "21. Bentuk & Saiz (形状与大小)",
+                desc: "Ciri fizikal dan geometri.",
+                items: [
+                    { char: "大", pinyin: "dà", meaning: "Besar", note: "Saiz besar" },
+                    { char: "小", pinyin: "xiǎo", meaning: "Kecil", note: "Saiz kecil" },
+                    { char: "圆", pinyin: "yuán", meaning: "Bulat", note: "Bentuk sfera/bulat" },
+                    { char: "长", pinyin: "cháng", meaning: "Panjang", note: "Ukuran panjang" }
+                ]
+            },
+            {
+                id: 'sc-festival',
+                title: "22. Perayaan & Budaya (节日)",
+                desc: "Sambutan perayaan tradisional.",
+                items: [
+                    { char: "新年", pinyin: "xīnnián", meaning: "Tahun Baru", note: "Sambutan tahun baru" },
+                    { char: "春节", pinyin: "chūnjié", meaning: "Tahun Baru Cina", note: "Festival musim bunga" },
+                    { char: "中秋", pinyin: "zhōngqiū", meaning: "Pesta Tanglung / Mid-Autumn", note: "Perayaan kuih bulan" },
+                    { char: "红包", pinyin: "hóngbāo", meaning: "Angpau", note: "Sampul duit raya/tahun baru" }
                 ]
             }
         ];
